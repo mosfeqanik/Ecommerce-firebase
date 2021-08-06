@@ -13,3 +13,4 @@ https://github.com/afgprogrammer/Flutter-Login-Page-UI
 https://github.com/afgprogrammer/Flutter-login-page
 https://github.com/GeekyAnts/flutter-login-home-animation
 https://github.com/abuanwar072/Welcome-Login-Signup-Page-Flutter
+https://github.com/TheAlphamerc/flutter_login_signup
