@@ -1,0 +1,15 @@
+for splashscreen
+use pritom splash with app asset image
+
+for login
+1st choice
+
+https://github.com/afgprogrammer/Flutter-Login-Signup-page
+https://github.com/afgprogrammer/Flutter-Login-Page-3
+
+other choice
+https://github.com/afgprogrammer/Flutter-Login-Page-Design
+https://github.com/afgprogrammer/Flutter-Login-Page-UI
+https://github.com/afgprogrammer/Flutter-login-page
+https://github.com/GeekyAnts/flutter-login-home-animation
+https://github.com/abuanwar072/Welcome-Login-Signup-Page-Flutter
