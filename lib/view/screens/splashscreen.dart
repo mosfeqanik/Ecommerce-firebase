@@ -23,12 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(image: AssetImage("assets/images/wowsell_image.png")),
               SizedBox(
-                height: 100,
+                height: 30,
               ),
               Text(
                 "Delivering Happiness",
@@ -36,9 +36,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     fontFamily: "Satisfy",
                     fontSize: 20,
                     color: Colors.black),
-              ),
-              SizedBox(
-                height: 20,
               ),
               CircularProgressIndicator(
                 color: Colors.black,
