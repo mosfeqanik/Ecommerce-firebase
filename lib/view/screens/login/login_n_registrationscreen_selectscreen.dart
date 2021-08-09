@@ -50,6 +50,8 @@ class HomePage extends StatelessWidget {
                 children: <Widget>[
                   MaterialButton(
                     minWidth: double.infinity,
+                    color: Color.fromRGBO(4, 248, 207,1),
+                    elevation: 0,
                     height: 60,
                     onPressed: () {
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
@@ -82,7 +84,7 @@ class HomePage extends StatelessWidget {
                       onPressed: () {
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
                       },
-                      color: Colors.yellow,
+                      color: Color.fromRGBO(251,243,100,1),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)
