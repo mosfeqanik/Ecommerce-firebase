@@ -11,7 +11,10 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 5),()=>Navigator.push(context, CupertinoPageRoute(builder: (_)=>LoginScreen())));
+    Timer(Duration(seconds: 5),()=>
+        Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+            (route) => false));
     super.initState();
   }
   @override
@@ -35,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 20,
               ),
               CircularProgressIndicator(
-                color: Colors.white,
+                color: Colors.black,
               ),
             ],
           ),
