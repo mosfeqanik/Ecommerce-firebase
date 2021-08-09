@@ -5,11 +5,16 @@ import 'package:wowsell/view/common_widgets/fade_animation.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: HomePage(),
+    home: loginRegistrationSelectionpage(),
   ));
 }
+class loginRegistrationSelectionpage extends StatefulWidget {
 
-class HomePage extends StatelessWidget {
+  @override
+  _loginRegistrationSelectionpageState createState() => _loginRegistrationSelectionpageState();
+}
+
+class _loginRegistrationSelectionpageState extends State<loginRegistrationSelectionpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +34,7 @@ class HomePage extends StatelessWidget {
                     Text(
                       "Welcome",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
                   ),
                   SizedBox(
