@@ -27,3 +27,10 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+  fonts:
+    - family: Satisfy
+      fonts:
+        - asset: assets/fonts/Satisfy-Regular.ttf
