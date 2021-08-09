@@ -8,7 +8,13 @@ void main() {
   ));
 }
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
+
+  @override
+  _SignupPageState createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +115,6 @@ class SignupPage extends StatelessWidget {
       ),
     );
   }
-
   Widget makeInput({label, obscureText = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,3 +144,7 @@ class SignupPage extends StatelessWidget {
     );
   }
 }
+
+
+
+

@@ -8,13 +8,15 @@ void main() {
     home: loginRegistrationSelectionpage(),
   ));
 }
-class loginRegistrationSelectionpage extends StatefulWidget {
 
+class loginRegistrationSelectionpage extends StatefulWidget {
   @override
-  _loginRegistrationSelectionpageState createState() => _loginRegistrationSelectionpageState();
+  _loginRegistrationSelectionpageState createState() =>
+      _loginRegistrationSelectionpageState();
 }
 
-class _loginRegistrationSelectionpageState extends State<loginRegistrationSelectionpage> {
+class _loginRegistrationSelectionpageState
+    extends State<loginRegistrationSelectionpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,19 +36,20 @@ class _loginRegistrationSelectionpageState extends State<loginRegistrationSelect
                     Text(
                       "Welcome",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   FadeAnimation(
-                      1.2,
-                      Text(
-                        "Automatic identity verification which enables you to verify your identity",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey[700], fontSize: 15),
-                      ))
+                    1.2,
+                    Text(
+                      "Automatic identity verification which enables you to verify your identity",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey[700], fontSize: 15),
+                    ),
+                  )
                 ],
               ),
               FadeAnimation(
