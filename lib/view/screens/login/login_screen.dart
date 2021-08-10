@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
-import 'package:wowsell/view/common_widgets/input_Text_Field.dart';
 import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
-
+import 'package:wowsell/view/common_widgets/input_Text_Field.dart';
+import 'package:wowsell/view/screens/login/registration_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,6 +12,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isObscure;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isObscure = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,10 +76,15 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
                       children: <Widget>[
-                        FadeAnimation(1.2,
-                            InputTextField(label: "Email",)),
-                        FadeAnimation(1.3,
-                            InputPasswordField(label: "Password", isObscure: true)),
+                        FadeAnimation(
+                            1.2,
+                            InputTextField(
+                              label: "Email",
+                            )),
+                        FadeAnimation(
+                            1.3,
+                            InputPasswordField(
+                                label: "Password", isObscure: isObscure)),
                       ],
                     ),
                   ),
@@ -113,10 +129,11 @@ class _LoginPageState extends State<LoginPage> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 18),
                             ),
-                            onTap: (){
+                            onTap: () {
                               Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(builder: (context) => LoginPage()),
-                                      (route) => false);
+                                  MaterialPageRoute(
+                                      builder: (context) => RegistrationPage()),
+                                  (route) => false);
                             },
                           ),
                         ],
@@ -139,4 +156,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
