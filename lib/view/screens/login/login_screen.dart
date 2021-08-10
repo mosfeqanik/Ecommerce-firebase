@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         FadeAnimation(1.2,
-                            InputTextField(label: "Email", isObscure: false)),
+                            InputTextField(label: "Email",)),
                         FadeAnimation(1.3,
                             InputPasswordField(label: "Password", isObscure: true)),
                       ],

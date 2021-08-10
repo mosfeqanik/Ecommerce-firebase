@@ -69,7 +69,7 @@ class _SignupPageState extends State<SignupPage> {
                 children: <Widget>[
                   FadeAnimation(
                     1.2,
-                    InputTextField(label: "Email", isObscure: true),
+                    InputTextField(label: "Email"),
                   ),
                   FadeAnimation(
                     1.3,
