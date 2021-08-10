@@ -27,28 +27,35 @@ class InputPasswordField extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.grey[400])),
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey[400])),
-            // suffixIcon: _obscureText == true
-            //     ? IconButton(
-            //     onPressed: () {
-            //       setState(() {
-            //         _obscureText = false;
-            //       });
-            //     },
-            //     icon: Icon(
-            //       Icons.remove_red_eye,
-            //       size: 20,
-            //     ))
-            //     : IconButton(
-            //     onPressed: () {
-            //       setState(() {
-            //         _obscureText = true;
-            //       });
-            //     },
-            //     icon: Icon(
-            //       Icons.visibility_off,
-            //       size: 20,
-            //     )),
-          ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  Icons.remove_red_eye,
+                  size: 20,
+                ),
+                onPressed: () {},
+              )
+              // suffixIcon: isObscure == true
+              //     ? IconButton(
+              //     onPressed: () {
+              //       setState(() {
+              //         isObscure = false;
+              //       });
+              //     },
+              //     icon: Icon(
+              //       Icons.remove_red_eye,
+              //       size: 20,
+              //     ))
+              //     : IconButton(
+              //     onPressed: () {
+              //       setState(() {
+              //         isObscure = true;
+              //       });
+              //     },
+              //     icon: Icon(
+              //       Icons.visibility_off,
+              //       size: 20,
+              //     )),
+              ),
         ),
         SizedBox(height: 30),
       ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
+import 'package:wowsell/view/screens/login/login_screen.dart';
+import 'package:wowsell/view/screens/login/registration_screen.dart';
 
 class LoginRegistrationSelectionpage extends StatefulWidget {
   @override
@@ -64,7 +66,9 @@ class _LoginRegistrationSelectionpageState
                       elevation: 0,
                       height: 60,
                       onPressed: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => LoginPage()),
+                                (route) => false);
                       },
                       shape: RoundedRectangleBorder(
                           side: BorderSide(color: Colors.black),
@@ -94,7 +98,9 @@ class _LoginRegistrationSelectionpageState
                         minWidth: double.infinity,
                         height: 60,
                         onPressed: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (context) => RegistrationPage()),
+                                  (route) => false);
                         },
                         color: Color.fromRGBO(251, 243, 100, 1),
                         elevation: 0,

@@ -2,20 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
 import 'package:wowsell/view/common_widgets/input_Text_Field.dart';
+import 'package:wowsell/view/screens/login/login_screen.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: SignupPage(),
-  ));
-}
 
-class SignupPage extends StatefulWidget {
+class RegistrationPage extends StatefulWidget {
   @override
-  _SignupPageState createState() => _SignupPageState();
+  _RegistrationPageState createState() => _RegistrationPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,10 +104,17 @@ class _SignupPageState extends State<SignupPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Already have an account?"),
-                      Text(
-                        " Login",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 18),
+                      InkWell(
+                        child: Text(
+                          " Login",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 18),
+                        ),
+                        onTap: (){
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (context) => LoginPage()),
+                                  (route) => false);
+                        },
                       ),
                     ],
                   )),
