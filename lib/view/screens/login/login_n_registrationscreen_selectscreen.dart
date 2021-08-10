@@ -2,13 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: LoginRegistrationSelectionpage(),
-  ));
-}
-
 class LoginRegistrationSelectionpage extends StatefulWidget {
   @override
   _LoginRegistrationSelectionpageState createState() =>
