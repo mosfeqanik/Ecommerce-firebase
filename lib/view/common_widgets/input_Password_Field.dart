@@ -22,11 +22,32 @@ class InputPasswordField extends StatelessWidget {
         TextField(
           obscureText: isObscure,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[400])),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[400])),
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey[400])),
+              border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey[400])),
+            // suffixIcon: _obscureText == true
+            //     ? IconButton(
+            //     onPressed: () {
+            //       setState(() {
+            //         _obscureText = false;
+            //       });
+            //     },
+            //     icon: Icon(
+            //       Icons.remove_red_eye,
+            //       size: 20,
+            //     ))
+            //     : IconButton(
+            //     onPressed: () {
+            //       setState(() {
+            //         _obscureText = true;
+            //       });
+            //     },
+            //     icon: Icon(
+            //       Icons.visibility_off,
+            //       size: 20,
+            //     )),
           ),
         ),
         SizedBox(height: 30),

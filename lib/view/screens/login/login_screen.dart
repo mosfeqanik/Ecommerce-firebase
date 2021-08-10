@@ -6,11 +6,16 @@ import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: LoginPage(),
+    home: Loginpage(),
   ));
 }
 
-class LoginPage extends StatelessWidget {
+class Loginpage extends StatefulWidget {
+  @override
+  _LoginpageState createState() => _LoginpageState();
+}
+
+class _LoginpageState extends State<Loginpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,3 +138,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
