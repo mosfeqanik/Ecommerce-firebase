@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
   final String label;
-  final bool isObscure;
-
-  InputTextField({this.label, this.isObscure});
+  InputTextField({this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,6 @@ class InputTextField extends StatelessWidget {
           height: 5,
         ),
         TextField(
-          obscureText: isObscure,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             enabledBorder: OutlineInputBorder(
