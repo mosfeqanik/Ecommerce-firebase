@@ -6,7 +6,7 @@ Group members are Md Mosfeq Anik and Pritom Chowdhury.Supervised by Ebrahim Joy
 ## Used features
 
 
-## ScreenShot
+## ScreenShots of these application
 
 <img src="assets/screenshots/Splash_Screen.jpg" height="500em"/>
 
