@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
 import 'package:wowsell/view/common_widgets/input_Text_Field.dart';
 import 'package:wowsell/view/screens/login/login_screen.dart';
-
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -11,10 +11,12 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  bool _isBuyer = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -68,26 +70,43 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                   FadeAnimation(
                     1.3,
-                    InputPasswordField(label: "Password", isObscure: true),
+                    InputPasswordField(label: "Password"),
                   ),
                 ],
               ),
+              Text(
+                _isBuyer?"Buyer":"Seller",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+              ),
+              Switch(
+                  activeTrackColor: Color.fromRGBO(211,211,211,0.9),
+                  activeColor: Color.fromRGBO(0, 0, 0, 1),
+                  inactiveTrackColor: Color.fromRGBO(4, 248, 207, 1),
+                  inactiveThumbColor: Color.fromRGBO(4, 248, 207, .9),
+                  value: _isBuyer,
+                  onChanged: (val) {
+                    setState(() {
+                      _isBuyer = val;
+                      print(_isBuyer);
+                    });
+                  }),
               FadeAnimation(
                   1.5,
                   Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border(
-                          bottom: BorderSide(color: Colors.black),
-                          top: BorderSide(color: Colors.black),
-                          left: BorderSide(color: Colors.black),
-                          right: BorderSide(color: Colors.black),
-                        )),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border(
+                        bottom: BorderSide(color: Colors.black),
+                        top: BorderSide(color: Colors.black),
+                        left: BorderSide(color: Colors.black),
+                        right: BorderSide(color: Colors.black),
+                      ),
+                    ),
                     child: MaterialButton(
                       minWidth: double.infinity,
                       height: 60,
                       onPressed: () {},
-                      color: Colors.greenAccent,
+                      color: Color.fromRGBO(4, 248, 207, 1),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
@@ -110,10 +129,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 18),
                         ),
-                        onTap: (){
+                        onTap: () {
                           Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (context) => LoginPage()),
-                                  (route) => false);
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()),
+                              (route) => false);
                         },
                       ),
                     ],
