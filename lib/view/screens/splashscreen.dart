@@ -1,9 +1,9 @@
-import 'dart:async';
+// import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'login/login_n_registrationscreen_selectscreen.dart';
+// import 'login/login_n_registrationscreen_selectscreen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,13 +12,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    Timer(Duration(seconds: 5),()=>
-        Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => LoginRegistrationSelectionpage()),
-            (route) => false));
-    super.initState();
-  }
+  // void initState() {
+  //   Timer(Duration(seconds: 5),()=>
+  //       Navigator.of(context).pushAndRemoveUntil(
+  //       MaterialPageRoute(builder: (context) => LoginRegistrationSelectionpage()),
+  //           (route) => false));
+  //   super.initState();
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
