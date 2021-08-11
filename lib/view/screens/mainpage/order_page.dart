@@ -4,7 +4,7 @@ class OrderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.green,
       body: Center(
         child: Text(
           'Order Page',
