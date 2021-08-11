@@ -20,7 +20,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     HomePage(),
     CartPage(),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,9 +29,10 @@ class _BottomNavbarState extends State<BottomNavbar> {
           bottomNavigationBar: CurvedNavigationBar(
             index: 1,
             color: Colors.white,
-            backgroundColor: Colors.blue,
             animationCurve: Curves.easeIn,
             animationDuration: Duration(milliseconds: 600),
+            buttonBackgroundColor: Colors.white,
+            backgroundColor: Colors.black,
             onTap: (index) {
               setState(() {
                 _page = index;
@@ -39,16 +40,16 @@ class _BottomNavbarState extends State<BottomNavbar> {
             },
             items: [
               Icon(
-                Icons.bookmark_added,
-                size: 35,
+                FontAwesomeIcons.bookmark,
+                size: 25,
               ),
               Icon(
                 Icons.house,
-                size: 35,
+                size: 25,
               ),
               Icon(
-                FontAwesomeIcons.gamepad,
-                size: 35,
+                Icons.shopping_cart_outlined,
+                size: 25,
               ),
             ],
           ),
