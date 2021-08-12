@@ -26,6 +26,31 @@ class _BottomNavbarState extends State<BottomNavbar> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "WoWSell",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            elevation: 4.0,
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.person,
+                  size: 25,
+                  color: Colors.black,
+                ),
+                onPressed: () {},
+              ),
+            ],
+            iconTheme: IconThemeData(color: Colors.black),
+          ),
+          drawer: Drawer(),
           bottomNavigationBar: CurvedNavigationBar(
             index: 1,
             color: Colors.white,
