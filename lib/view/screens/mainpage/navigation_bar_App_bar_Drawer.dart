@@ -41,7 +41,15 @@ class _BottomNavbarState extends State<BottomNavbar> {
             actions: [
               IconButton(
                 icon: Icon(
-                  Icons.person,
+                  Icons.search,
+                  size: 25,
+                  color: Colors.black,
+                ),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.shopping_cart,
                   size: 25,
                   color: Colors.black,
                 ),
@@ -91,7 +99,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
                 ),
                 CustomListTile(
                   icon: Icons.star,
-                  texttitle: "Prithom Chowdhury",
+                  texttitle: "Pritom Chowdhury",
                   ontap: () => {},
                 ),
                 CustomListTile(
