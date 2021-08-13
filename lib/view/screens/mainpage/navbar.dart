@@ -50,7 +50,67 @@ class _BottomNavbarState extends State<BottomNavbar> {
             ],
             iconTheme: IconThemeData(color: Colors.black),
           ),
-          drawer: Drawer(),
+          drawer: Drawer(
+            child: ListView(
+              children: [
+                DrawerHeader(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: <Color>[
+                    Color.fromRGBO(4, 248, 207, 1),
+                    Color.fromRGBO(251, 243, 100, 1),
+                  ])),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Material(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          elevation: 10,
+                          child: Image.asset(
+                            "assets/images/wow_sell_round.png",
+                            width: 100,
+                            height: 100,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text('E-Commerce application')
+                      ],
+                    ),
+                  ),
+                ),
+                CustomListTile(
+                  icon: Icons.person,
+                  texttitle: "Group Members",
+                  ontap: () => {},
+                ),
+                CustomListTile(
+                  icon: Icons.star,
+                  texttitle: "Md Mosfeq Anik",
+                  ontap: () => {},
+                ),
+                CustomListTile(
+                  icon: Icons.star,
+                  texttitle: "Prithom Chowdhury",
+                  ontap: () => {},
+                ),
+                CustomListTile(
+                  icon: Icons.engineering,
+                  texttitle: "Supervised By",
+                  ontap: () => {},
+                ),
+                CustomListTile(
+                  icon: Icons.assistant_photo,
+                  texttitle: "Ebrahim Joy",
+                  ontap: () => {},
+                ),
+                Divider(),
+                ListTile(
+                  title: Text('0.0.1'),
+                )
+              ],
+            ),
+          ),
           bottomNavigationBar: CurvedNavigationBar(
             index: 1,
             color: Colors.white,
@@ -80,5 +140,30 @@ class _BottomNavbarState extends State<BottomNavbar> {
           ),
           body: pages[_page],
         ));
+  }
+}
+
+class CustomListTile extends StatelessWidget {
+  IconData icon;
+  String texttitle;
+  Function ontap;
+
+  CustomListTile({this.icon, this.texttitle, this.ontap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Align(
+        alignment: FractionalOffset.bottomCenter,
+        child: Column(
+          children: <Widget>[
+            Divider(),
+            ListTile(
+                leading: Icon(icon),
+                title: Text(texttitle)),
+          ],
+        ),
+      ),
+    );
   }
 }
