@@ -8,4 +8,13 @@ class EcommerceProvider extends ChangeNotifier {
     _isObscure = value;
     notifyListeners();
   }
+
+  bool _isEditButtonClicked = true;
+
+  bool get isEditButtonClicked => _isEditButtonClicked;
+
+  set isEditButtonClicked(bool value) {
+    _isEditButtonClicked = value;
+    notifyListeners();
+  }
 }
