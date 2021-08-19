@@ -28,7 +28,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
         home: Scaffold(
           appBar: AppBar(
             title: Text(
-              "WoWSell",
+              "WoWSell.ss",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
