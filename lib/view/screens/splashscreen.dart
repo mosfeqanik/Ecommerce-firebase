@@ -1,9 +1,8 @@
-// import 'dart:async';
-
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 
-// import 'login/login_n_registrationscreen_selectscreen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,17 +11,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  // void initState() {
-  //   Timer(Duration(seconds: 5),()=>
-  //       Navigator.of(context).pushAndRemoveUntil(
-  //       MaterialPageRoute(builder: (context) => LoginRegistrationSelectionpage()),
-  //           (route) => false));
-  //   super.initState();
-  // }
+  void initState() {
+    Timer(Duration(seconds: 5),()=>
+        Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => BottomNavbar()),
+            (route) => false));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color.fromRGBO(250, 244, 211, 1.0),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(

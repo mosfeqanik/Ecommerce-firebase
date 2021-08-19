@@ -5,8 +5,6 @@ import 'package:wowsell/view/screens/mainpage/cart_page.dart';
 import 'package:wowsell/view/screens/mainpage/homepage.dart';
 import 'package:wowsell/view/screens/mainpage/order_page.dart';
 
-void main() => runApp(BottomNavbar());
-
 class BottomNavbar extends StatefulWidget {
   @override
   _BottomNavbarState createState() => _BottomNavbarState();
@@ -28,7 +26,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
         home: Scaffold(
           appBar: AppBar(
             title: Text(
-              "WoWSell.ss",
+              "WoWSell",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,

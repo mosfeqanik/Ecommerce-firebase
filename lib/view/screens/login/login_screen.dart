@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                       FadeAnimation(
                           1.2,
                           Text(
-                            "Login to your account ",
+                            "Login to your account",
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[700]),
                           )),
