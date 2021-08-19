@@ -1,8 +1,12 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wowsell/components/cart.dart';
 import 'package:wowsell/components/horizontal_listview.dart';
 import 'package:wowsell/components/product_view.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
+
 
 class Coder extends StatefulWidget {
 
@@ -14,7 +18,7 @@ class Coder extends StatefulWidget {
 class _CoderState extends State<Coder> {
 
 
-
+  var _page = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +77,95 @@ class _CoderState extends State<Coder> {
           ],
           iconTheme: IconThemeData(color: Colors.black),
         ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: <Color>[
+                      Color.fromRGBO(4, 248, 207, 1),
+                      Color.fromRGBO(251, 243, 100, 1),
+                    ])),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Material(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        elevation: 10,
+                        child: Image.asset(
+                          "assets/images/wow_sell_round.png",
+                          width: 100,
+                          height: 100,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text('E-Commerce application')
+                    ],
+                  ),
+                ),
+              ),
+              CustomListTile(
+                icon: Icons.person,
+                texttitle: "Group Members",
+                ontap: () => {},
+              ),
+              CustomListTile(
+                icon: Icons.star,
+                texttitle: "Md Mosfeq Anik",
+                ontap: () => {},
+              ),
+              CustomListTile(
+                icon: Icons.star,
+                texttitle: "Pritom Chowdhury",
+                ontap: () => {},
+              ),
+              CustomListTile(
+                icon: Icons.engineering,
+                texttitle: "Supervised By",
+                ontap: () => {},
+              ),
+              CustomListTile(
+                icon: Icons.assistant_photo,
+                texttitle: "Ebrahim Joy",
+                ontap: () => {},
+              ),
+              Divider(),
+              ListTile(
+                title: Text('0.0.1'),
+              )
+            ],
+          ),
+        ),
+        bottomNavigationBar: CurvedNavigationBar(
+          index: 1,
+          color: Colors.white,
+          animationCurve: Curves.easeIn,
+          animationDuration: Duration(milliseconds: 600),
+          buttonBackgroundColor: Colors.white,
+          backgroundColor: Colors.black,
+          onTap: (index) {
+            setState(() {
+              _page = index;
+            });
+          },
+          items: [
+            Icon(
+              FontAwesomeIcons.bookmark,
+              size: 25,
+            ),
+            Icon(
+              Icons.house,
+              size: 25,
+            ),
+            Icon(
+              Icons.shopping_cart_outlined,
+              size: 25,
+            ),
+          ],
+        ),
+
         body: new ListView(
           children:<Widget> [
             image_carousel,

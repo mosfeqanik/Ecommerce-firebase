@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 
+import 'package:wowsell/view/screens/mainpage/homepage.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(Duration(seconds: 5),()=>
         Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => BottomNavbar()),
+        MaterialPageRoute(builder: (context) => Coder()),
             (route) => false));
     super.initState();
   }

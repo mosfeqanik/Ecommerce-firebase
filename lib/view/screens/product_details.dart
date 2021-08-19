@@ -166,7 +166,7 @@ class _ProductDetailState extends State<ProductDetails>
          Divider(),
          new ListTile(
            title: new Text("product Desciption"),
-           subtitle: new Text("Blue & beige tartan checks checked opaque casual shirt ,has a slim collar, button placket, 1 patch pocket, long regular sleeves, curved hem.Blue & beige tartan checks checked opaque casual shirt ,has a slim collar, button placket, 1 patch pocket, long regular sleeves, curved hem"),
+           subtitle: new Text("Blue & beige tartan checks checked opaqueee casual shirt ,has a slim collar, button placket, 1 patch pocket, long regular sleeves, curved hem.Blue & beige tartan checks checked opaque casual shirt ,has a slim collar, button placket, 1 patch pocket, long regular sleeves, curved hem"),
          )
 
      ],
