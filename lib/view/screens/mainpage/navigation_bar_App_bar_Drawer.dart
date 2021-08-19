@@ -47,7 +47,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
               ),
               IconButton(
                 icon: Icon(
-                  Icons.shopping_cart,
+                  Icons.person,
                   size: 25,
                   color: Colors.black,
                 ),
