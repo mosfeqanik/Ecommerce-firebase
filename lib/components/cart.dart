@@ -8,30 +8,7 @@ class _CartState extends State<Cart>{
   @override Widget build (BuildContext context){
     return Scaffold(
 
-      appBar: AppBar(
-        title: Text(
-          "WoWSell",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 4.0,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              size: 25,
-              color: Colors.black,
-            ),
-            onPressed: () {},
-          ),
-        ],
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
+
       body: new Cart_Products(),
       bottomNavigationBar: new Container(
         color:Colors.white70,

@@ -1,10 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:wowsell/view/screens/mainpage/cart_page.dart';
+import 'package:wowsell/components/cart.dart';
 import 'package:wowsell/view/screens/mainpage/homepage.dart';
-
-import 'package:wowsell/view/screens/mainpage/order_page.dart';
+import 'package:wowsell/view/screens/product_details.dart';
 
 class BottomNavbar extends StatefulWidget {
   @override
@@ -15,9 +14,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
   var _page = 1;
 
   final pages = [
-    OrderPage(),
+    ProductDetails(),
     HomePage(),
-    CartPage(),
+    Cart(),
   ];
 
   @override
