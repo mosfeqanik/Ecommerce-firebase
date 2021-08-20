@@ -1,8 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:wowsell/view/screens/mainpage/homepage.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,12 +12,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 5),()=>
-        Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomePage()),
+    Timer(
+        Duration(seconds: 5),
+        () => Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => BottomNavbar()),
             (route) => false));
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Text(
                 "Delivering Happiness",
                 style: TextStyle(
-                    fontFamily: "Satisfy",
-                    fontSize: 20,
-                    color: Colors.black),
+                    fontFamily: "Satisfy", fontSize: 20, color: Colors.black),
               ),
               CircularProgressIndicator(
                 color: Colors.black,

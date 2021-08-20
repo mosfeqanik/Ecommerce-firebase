@@ -22,9 +22,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: Text(
               "WoWSell",
@@ -146,7 +144,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
             ],
           ),
           body: pages[_page],
-        ));
+        );
   }
 }
 
