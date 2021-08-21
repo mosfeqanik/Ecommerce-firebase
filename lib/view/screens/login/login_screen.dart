@@ -80,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                             1.2,
                             InputTextField(
                               label: "Email",
+
                             )),
                         FadeAnimation(
                             1.3,

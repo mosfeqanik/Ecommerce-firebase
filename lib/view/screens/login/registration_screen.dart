@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
 import 'package:wowsell/view/common_widgets/input_Text_Field.dart';
-import 'package:wowsell/view/screens/login/login_screen.dart';
+import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -11,7 +14,34 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  TextEditingController _emailEditController = TextEditingController();
+  TextEditingController _passwordEditController = TextEditingController();
+
   bool _isBuyer = true;
+
+  signup()async{
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailEditController.text,
+          password: _passwordEditController.text
+      );
+      var authCredential = userCredential.user;
+      print(authCredential.uid);
+      if(authCredential.uid.isNotEmpty){
+        Navigator.push(context, CupertinoPageRoute(builder: (__)=>NavbarAppbar()));
+      }else{
+        CustomToast.toast('Something is wrong');
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        CustomToast.toast('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        CustomToast.toast('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +100,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                   FadeAnimation(
                     1.3,
-                    InputPasswordField(label: "Password"),
+                    InputPasswordField(inputTextEditController:_passwordEditController , label: "Password"),
                   ),
                 ],
               ),
@@ -130,10 +160,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               fontWeight: FontWeight.w600, fontSize: 18),
                         ),
                         onTap: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
-                              (route) => false);
+                          // Navigator.of(context).pushAndRemoveUntil(
+                          //     MaterialPageRoute(
+                          //         builder: (context) => LoginPage()),
+                          //     (route) => false);
                         },
                       ),
                     ],

@@ -5,8 +5,9 @@ import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 class InputPasswordField extends StatelessWidget {
   final String label;
   final bool isObscure;
+  final TextEditingController inputTextEditController;
 
-  InputPasswordField({this.label, this.isObscure});
+  InputPasswordField({this.label, this.isObscure,this.inputTextEditController});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class InputPasswordField extends StatelessWidget {
                 height: 5,
               ),
               TextField(
+                controller: inputTextEditController,
                 obscureText: provider.isObscure,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),

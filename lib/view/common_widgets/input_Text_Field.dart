@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
   final String label;
-  InputTextField({this.label});
+  final TextEditingController inputTextEditController;
+  InputTextField({this.label,this.inputTextEditController});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class InputTextField extends StatelessWidget {
           height: 5,
         ),
         TextField(
+          controller: inputTextEditController,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             enabledBorder: OutlineInputBorder(

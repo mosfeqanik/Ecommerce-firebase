@@ -5,12 +5,12 @@ import 'package:wowsell/components/cart.dart';
 import 'package:wowsell/view/screens/mainpage/homepage.dart';
 import 'package:wowsell/view/screens/product_details.dart';
 
-class BottomNavbar extends StatefulWidget {
+class NavbarAppbar extends StatefulWidget {
   @override
-  _BottomNavbarState createState() => _BottomNavbarState();
+  _NavbarAppbarState createState() => _NavbarAppbarState();
 }
 
-class _BottomNavbarState extends State<BottomNavbar> {
+class _NavbarAppbarState extends State<NavbarAppbar> {
   var _page = 1;
 
   final pages = [
