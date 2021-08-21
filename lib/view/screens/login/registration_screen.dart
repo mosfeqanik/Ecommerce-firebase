@@ -17,7 +17,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController _emailEditController = TextEditingController();
   TextEditingController _passwordEditController = TextEditingController();
 
-  bool _isBuyer = true;
+
+
 
   signup()async{
     try {
@@ -28,7 +29,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
       var authCredential = userCredential.user;
       print(authCredential.uid);
       if(authCredential.uid.isNotEmpty){
-        Navigator.push(context, CupertinoPageRoute(builder: (__)=>NavbarAppbar()));
+        print(authCredential.uid);
+        CustomToast.toast('Succesfull');
       }else{
         CustomToast.toast('Something is wrong');
       }
@@ -96,7 +98,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 children: <Widget>[
                   FadeAnimation(
                     1.2,
-                    InputTextField(label: "Email"),
+                    InputTextField(inputTextEditController:_emailEditController,label: "Email"),
                   ),
                   FadeAnimation(
                     1.3,
@@ -104,22 +106,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ],
               ),
-              Text(
-                _isBuyer?"Buyer":"Seller",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
-              ),
-              Switch(
-                  activeTrackColor: Color.fromRGBO(211,211,211,0.9),
-                  activeColor: Color.fromRGBO(0, 0, 0, 1),
-                  inactiveTrackColor: Color.fromRGBO(4, 248, 207, 1),
-                  inactiveThumbColor: Color.fromRGBO(4, 248, 207, .9),
-                  value: _isBuyer,
-                  onChanged: (val) {
-                    setState(() {
-                      _isBuyer = val;
-                      print(_isBuyer);
-                    });
-                  }),
+              // Text(
+              //   _isBuyer?"Buyer":"Seller",
+              //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+              // ),
+
               FadeAnimation(
                   1.5,
                   Container(
@@ -135,7 +126,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     child: MaterialButton(
                       minWidth: double.infinity,
                       height: 60,
-                      onPressed: () {},
+                      onPressed: () {
+                        signup();
+                      },
                       color: Color.fromRGBO(4, 248, 207, 1),
                       elevation: 0,
                       shape: RoundedRectangleBorder(

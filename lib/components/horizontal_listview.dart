@@ -47,7 +47,7 @@ class _HorizontalListState extends State<HorizontalList> {
 class Category extends StatelessWidget{
   final String image_location;
   final String image_caption;
-  Category({this.image_location, this.image_caption});
+  Category({ this.image_location,  this.image_caption});
   @override
   Widget build(BuildContext context){
     return Padding(
