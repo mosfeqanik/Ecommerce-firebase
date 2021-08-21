@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "778929376365",
+    "project_id": "wowsell-b6337",
+    "storage_bucket": "wowsell-b6337.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778929376365:android:00644a0bf741874e40c364",
+        "android_client_info": {
+          "package_name": "com.example.wowsell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778929376365-n4u85bn38nma7oaphd3veoirl23jrqej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wowsell",
+            "certificate_hash": "f6a4f649aa884f1112c2daae2e2e431372e9b349"
+          }
+        },
+        {
+          "client_id": "778929376365-9vf2msoaef7gjmcvdtpg53266op8p61r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbu1ElSeMxNisu4YKPkLlmqGd9cl834tA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778929376365-9vf2msoaef7gjmcvdtpg53266op8p61r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
