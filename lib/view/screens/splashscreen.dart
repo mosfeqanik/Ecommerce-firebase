@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
         () => Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => RegistrationPage()),
+            MaterialPageRoute(builder: (context) => NavbarAppbar()),
             (route) => false));
     super.initState();
   }

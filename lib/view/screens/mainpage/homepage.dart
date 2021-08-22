@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     await _fireStoreInstance.collection("carousel_slider").get();
     setState(() {
       for (int i = 0; i < carouselCollection.docs.length; i++) {
-        _carouselImages.add(carouselCollection.docs[i]["img_path"]);
+        _carouselImages.add(carouselCollection.docs[i]["img-path"]);
       }
     });
     return carouselCollection.docs;
