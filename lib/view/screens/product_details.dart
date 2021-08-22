@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:wowsell/components/cart.dart';
 class ProductDetails extends StatefulWidget{
   
-  final product_detail_name;
-  final product_detail_new_price;
+  final productDetailName;
+  final productDetailPrice;
   final product_detail_old_price;
-  final product_detail_picture;
+  final productDetailPicture;
   
 
 ProductDetails(
 {
-  this.product_detail_name,
- this.product_detail_new_price,
+  this.productDetailName,
+ this.productDetailPrice,
   this.product_detail_old_price,
-  this.product_detail_picture
+  this.productDetailPicture
 });
 @override
   _ProductDetailState createState()=> _ProductDetailState();
@@ -68,12 +68,12 @@ class _ProductDetailState extends State<ProductDetails>
            child: GridTile(
              child: Container(
                color: Colors.white70,
-               child: Image.asset(widget.product_detail_picture),
+               child: Image.asset(widget.productDetailPicture),
              ),
              footer: new Container(
                color: Colors.white70,
                child: ListTile(
-                 leading: new Text(widget.product_detail_name,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0),),
+                 leading: new Text(widget.productDetailName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0),),
                  title: new Row(
                    children: <Widget>[
                      Expanded(
@@ -81,7 +81,7 @@ class _ProductDetailState extends State<ProductDetails>
                            style: TextStyle(color: Colors.grey,decoration: TextDecoration.lineThrough),)
                      ),
                      Expanded(
-                         child: new Text("\$${widget.product_detail_new_price}",
+                         child: new Text("\$${widget.productDetailPrice}",
                            style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),
                      )),
                    ]

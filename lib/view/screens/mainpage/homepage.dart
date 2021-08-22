@@ -1,9 +1,9 @@
-import 'package:carousel_pro/carousel_pro.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:wowsell/components/horizontal_listview.dart';
-import 'package:wowsell/components/product_view.dart';
+import 'package:wowsell/view/common_widgets/Products_Row_For_Homepage.dart';
+import 'package:wowsell/view/common_widgets/homepage_Carousel_Slider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,12 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var _fireStoreInstance = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          MainPageCarousel(),
+          HomePageCarouselSlider(),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Text('Categories'),
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             height: 320.0,
-            child: Products(),
+            child: ProductsRowForHomepage(),
           )
         ],
       ),
@@ -37,26 +38,4 @@ class _HomePageState extends State<HomePage> {
 
 
 }
-class MainPageCarousel extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200.0,
-      child: Carousel(
-        boxFit: BoxFit.cover,
-        images: [
-          AssetImage('assets/images/promotion__one.png'),
-          AssetImage('assets/images/promotion_three.png'),
-          AssetImage('assets/images/four.png'),
-          AssetImage('assets/images/promotion_two.png')
-        ],
-        autoplay: true,
-        animationCurve: Curves.fastOutSlowIn,
-        animationDuration: Duration(milliseconds: 1000),
-        dotSize: 4.0,
-        indicatorBgPadding: 2.0,
-        dotBgColor: Colors.transparent,
-      ),
-    );
-  }
-}
+
