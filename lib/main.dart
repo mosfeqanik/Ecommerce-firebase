@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/view/screens/splashscreen.dart';
@@ -17,13 +18,12 @@ class WowSellScreen extends StatelessWidget {
       create: (context){
         return EcommerceProvider();
       },
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'note',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: SplashScreen()
+      child: ScreenUtilInit(
+        designSize: Size(375, 812),
+        builder: () => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: SplashScreen()
+        ),
       ),
     );
   }

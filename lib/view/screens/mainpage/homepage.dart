@@ -11,13 +11,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> _carouselImages = [];
   var _fireStoreInstance = FirebaseFirestore.instance;
+
+  fetchCarouselImage() async {
+    QuerySnapshot carouselCollection =
+    await _fireStoreInstance.collection("carousel_slider").get();
+    setState(() {
+      for (int i = 0; i < carouselCollection.docs.length; i++) {
+        _carouselImages.add(carouselCollection.docs[i]["img_path"]);
+      }
+    });
+    return carouselCollection.docs;
+  }
+
+  @override
+  void initState() {
+    fetchCarouselImage();
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          HomePageCarouselSlider(),
+          HomePageCarouselSlider(carouselImages:_carouselImages),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Text('Categories'),

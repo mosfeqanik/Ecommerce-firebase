@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wowsell/const/appcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePageCarouselSlider extends StatelessWidget {
   final List<String> carouselImages;
@@ -47,7 +48,7 @@ class HomePageCarouselSlider extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 10.h,
             ),
             DotsIndicator(
               dotsCount:
