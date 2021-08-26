@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
@@ -12,13 +13,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isObscure;
+  bool isObscure = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    isObscure = false;
   }
 
   @override
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                             minWidth: double.infinity,
                             height: 60,
                             onPressed: () {},
-                            color: Color.fromRGBO(4, 248, 207, 1),
+                            color: AppColors.qprimarycolor1,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
@@ -131,10 +131,10 @@ class _LoginPageState extends State<LoginPage> {
                                   fontWeight: FontWeight.w600, fontSize: 18),
                             ),
                             onTap: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => RegistrationPage()),
-                                  (route) => false);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => RegistrationPage()),
+                              );
                             },
                           ),
                         ],

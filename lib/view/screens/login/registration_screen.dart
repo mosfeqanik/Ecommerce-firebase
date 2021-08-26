@@ -6,7 +6,8 @@ import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
 import 'package:wowsell/view/common_widgets/input_Text_Field.dart';
 import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
-import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
+import 'package:wowsell/view/screens/login/Profile_View_Update.dart';
+import 'package:wowsell/view/screens/login/login_screen.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -17,21 +18,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController _emailEditController = TextEditingController();
   TextEditingController _passwordEditController = TextEditingController();
 
-
-
-
-  signup()async{
+  signup() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailEditController.text,
-          password: _passwordEditController.text
-      );
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailEditController.text,
+              password: _passwordEditController.text);
       var authCredential = userCredential.user;
-      print(authCredential.uid);
-      if(authCredential.uid.isNotEmpty){
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => ViewProfilePage()),
+              (route) => false);
+      print(authCredential!.uid);
+      if (authCredential.uid.isNotEmpty) {
         print(authCredential.uid);
-        CustomToast.toast('Succesfull');
-      }else{
+        CustomToast.toast('Login is Successful');
+      } else {
         CustomToast.toast('Something is wrong');
       }
     } on FirebaseAuthException catch (e) {
@@ -98,11 +99,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 children: <Widget>[
                   FadeAnimation(
                     1.2,
-                    InputTextField(inputTextEditController:_emailEditController,label: "Email"),
+                    InputTextField(
+                        inputTextEditController: _emailEditController,
+                        label: "Email"),
                   ),
                   FadeAnimation(
                     1.3,
-                    InputPasswordField(inputTextEditController:_passwordEditController , label: "Password"),
+                    InputPasswordField(
+                        inputTextEditController: _passwordEditController,
+                        label: "Password"),
                   ),
                 ],
               ),
@@ -153,10 +158,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               fontWeight: FontWeight.w600, fontSize: 18),
                         ),
                         onTap: () {
-                          // Navigator.of(context).pushAndRemoveUntil(
-                          //     MaterialPageRoute(
-                          //         builder: (context) => LoginPage()),
-                          //     (route) => false);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
+                          );
                         },
                       ),
                     ],

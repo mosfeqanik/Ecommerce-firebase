@@ -17,12 +17,4 @@ class EcommerceProvider extends ChangeNotifier {
     _isEditButtonClicked = value;
     notifyListeners();
   }
-
-  int _dotPosition = 0;
-
-  int get dotPosition => _dotPosition;
-  set dotPosition(int value) {
-    _dotPosition = value;
-    notifyListeners();
-  }
 }

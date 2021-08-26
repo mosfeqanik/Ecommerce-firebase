@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/screens/login/login_screen.dart';
 import 'package:wowsell/view/screens/login/registration_screen.dart';
@@ -62,13 +63,14 @@ class _LoginRegistrationSelectionpageState
                     1.6,
                     MaterialButton(
                       minWidth: double.infinity,
-                      color: Color.fromRGBO(4, 248, 207, 1),
+                      color: AppColors.qprimarycolor1,
                       elevation: 0,
                       height: 60,
                       onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (context) => LoginPage()),
-                                (route) => false);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
                       },
                       shape: RoundedRectangleBorder(
                           side: BorderSide(color: Colors.black),
@@ -98,11 +100,13 @@ class _LoginRegistrationSelectionpageState
                         minWidth: double.infinity,
                         height: 60,
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (context) => RegistrationPage()),
-                                  (route) => false);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegistrationPage()),
+                          );
                         },
-                        color: Color.fromRGBO(251, 243, 100, 1),
+                        color: AppColors.qprimarycolor2,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
