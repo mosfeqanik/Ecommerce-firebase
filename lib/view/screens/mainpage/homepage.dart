@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -44,7 +43,6 @@ class _HomePageState extends State<HomePage> {
           ["product_description"],
           "product_price": productCollection.docs[i]["product_price"],
         });
-        print(productCollection.docs[i]["product_price"]);
       }
     });
 

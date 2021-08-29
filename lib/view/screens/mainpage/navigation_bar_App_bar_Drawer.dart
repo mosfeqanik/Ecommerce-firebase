@@ -2,9 +2,12 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wowsell/components/cart.dart';
+import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/view/screens/login/login_n_registrationscreen_selectscreen.dart';
+import 'package:wowsell/view/screens/mainpage/FavourtiePage.dart';
 import 'package:wowsell/view/screens/mainpage/homepage.dart';
-import 'package:wowsell/view/screens/product_details.dart';
+import 'package:wowsell/view/screens/mainpage/notification_page.dart';
+import 'package:wowsell/view/screens/mainpage/order_page.dart';
 
 class NavbarAppbar extends StatefulWidget {
   @override
@@ -15,8 +18,10 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
   var _page = 1;
 
   final pages = [
-    ProductDetails(),
+    NotificationPage(),
+    OrderPage(),
     HomePage(),
+    FavouritePage(),
     Cart(),
   ];
 
@@ -118,11 +123,11 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
         ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        index: 1,
+        index: 2,
         color: Colors.white,
         animationCurve: Curves.easeIn,
         animationDuration: Duration(milliseconds: 600),
-        buttonBackgroundColor: Colors.white,
+        buttonBackgroundColor: AppColors.qprimarycolor1,
         backgroundColor: Colors.black,
         onTap: (index) {
           setState(() {
@@ -131,7 +136,11 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
         },
         items: [
           Icon(
-            FontAwesomeIcons.bookmark,
+            FontAwesomeIcons.tag,
+            size: 25,
+          ),
+          Icon(
+            Icons.bookmark_outlined,
             size: 25,
           ),
           Icon(
@@ -139,7 +148,11 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
             size: 25,
           ),
           Icon(
-            Icons.shopping_cart_outlined,
+            Icons.favorite_outlined,
+            size: 25,
+          ),
+          Icon(
+            Icons.shopping_cart,
             size: 25,
           ),
         ],
