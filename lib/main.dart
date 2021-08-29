@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
-import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 import 'package:wowsell/view/screens/splashscreen.dart';
 
 void main() async {

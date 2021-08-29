@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:provider/provider.dart';
-import 'package:wowsell/model/E_commerce_Provider_Data.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wowsell/view/common_widgets/buttonStyle.dart';
+import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 
 class ViewProfilePage extends StatefulWidget {
   @override
@@ -11,6 +14,20 @@ class ViewProfilePage extends StatefulWidget {
 }
 
 class _ViewProfilePageState extends State<ViewProfilePage> {
+  TextEditingController _nameEditController = TextEditingController();
+  TextEditingController _phoneNumberEditController = TextEditingController();
+  TextEditingController _addressEditController = TextEditingController();
+
+  updateUserDetail() {
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection("users-form-data");
+    return _collectionRef.doc(FirebaseAuth.instance.currentUser.email).update({
+      "name": _nameEditController.text,
+      "phone": _phoneNumberEditController.text,
+      "address": _addressEditController.text,
+    }).then((value) => CustomToast.toast('Updated Successfully'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +39,9 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
             size: 25,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Text(
           'User',
@@ -33,271 +52,230 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
         ),
         centerTitle: true,
       ),
-      body: Consumer<EcommerceProvider>(builder: (_, provider, ___) {
-        return Container(
-          color: Colors.white,
-          child: ListView(
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Container(
-                    height: 250.0,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                      //profile Pic
-                      child: Column(
-                        children: [
-                          Stack(fit: StackFit.loose, children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  width: 140.0,
-                                  height: 140.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: AssetImage('assets/images/as.png'),
-                                      fit: BoxFit.cover,
+      body: Container(
+        color: Colors.white,
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection("users-form-data")
+              .doc(FirebaseAuth.instance.currentUser.email)
+              .snapshots(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            var data = snapshot.data;
+            if (data == null) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return ListView(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Container(
+                      height: 250.0,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+                        //profile Pic
+                        child: Column(
+                          children: [
+                            Stack(fit: StackFit.loose, children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    width: 140.0,
+                                    height: 140.0,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/Profilepic.png'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(top: 90.0, right: 100.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    CircleAvatar(
-                                      backgroundColor: Colors.red,
-                                      radius: 25.0,
-                                      child: Icon(
-                                        Icons.camera_alt,
-                                        color: Colors.white,
-                                      ),
-                                    )
-                                  ],
-                                )),
-                          ])
-                        ],
+                                ],
+                              ),
+                              Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 90.0, right: 100.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      CircleAvatar(
+                                        backgroundColor: Colors.red,
+                                        radius: 25.0,
+                                        child: Icon(
+                                          Icons.camera_alt,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                            ])
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    color: Color(0xffFFFFFF),
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 25.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Column(
+                    Container(
+                      color: Color(0xffFFFFFF),
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 25.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 25.0, right: 25.0, top: 25.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Text(
+                                          'Personal Information',
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    //Edit
+                                  ],
+                                )),
+                            LabelForProfile(labelForProfile: '🧑‍ Name'),
+                            InputFieldForProfile(
+                              qTextEditController: _nameEditController =
+                                  TextEditingController(text: data['name']),
+                              isEnable: true,
+                              hintTextForInputField: "Enter Your Name",
+                            ),
+                            //Email Address
+                            //Mobile Number
+                            LabelForProfile(
+                                labelForProfile: '📱 Mobile Number'),
+                            InputFieldForProfile(
+                              qTextEditController: _phoneNumberEditController =
+                                  TextEditingController(text: data['phone']),
+                              isEnable: true,
+                              hintTextForInputField: "Enter Mobile Number",
+                            ),
+                            LabelForProfile(
+                                labelForProfile: '🗼 Contract Address'),
+                            InputFieldForProfile(
+                              qTextEditController: _addressEditController =
+                                  TextEditingController(text: data['address']),
+                              isEnable: true,
+                              hintTextForInputField: "Enter Contract Address",
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 25.0, right: 25.0, top: 45.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
-                                      Text(
-                                        'Personal Information',
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                      Expanded(
+                                        child: Padding(
+                                            padding: EdgeInsets.only(right: 10.0),
+                                            child:MaterialButton(
+                                              color: Colors.green,
+                                              elevation: 0,
+                                              height: 50.h,
+                                              shape: RoundedRectangleBorder(
+                                                  side: BorderSide(color: Colors.black),
+                                                  borderRadius: BorderRadius.circular(10)),
+                                              onPressed: () { updateUserDetail(); },
+                                              child: Text(
+                                                'Update',
+                                                style: TextStyle(color: Colors.white,
+                                                    fontWeight: FontWeight.w600, fontSize: 18),
+                                              ),
+                                            )
+                                        ),
+                                        flex: 2,
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                            padding: EdgeInsets.only(right: 10.0),
+                                            child:MaterialButton(
+                                              color: Colors.red,
+                                              elevation: 0,
+                                              height: 50.h,
+                                              shape: RoundedRectangleBorder(
+                                                  side: BorderSide(color: Colors.black),
+                                                  borderRadius: BorderRadius.circular(10)),
+                                              onPressed: () { Navigator.pop(context); },
+                                              child: Text(
+                                                'Cancel',
+                                                style: TextStyle(color: Colors.white,
+                                                    fontWeight: FontWeight.w600, fontSize: 18),
+                                              ),
+                                            )
+                                        ),
+                                        flex: 2,
                                       ),
                                     ],
                                   ),
-                                  //Edit
-                                  provider.isEditButtonClicked
-                                      ? Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            GetIcon(
-                                              iconPic: Icons.edit,
-                                              iconBgColor: Colors.green,
-                                              iconColor: Colors.white,
-                                              onTapOnIcon: () {
-                                                provider.isEditButtonClicked =
-                                                    false;
-                                              },
-                                            ),
-                                            SizedBox(width: 10),
-                                            GetIcon(
-                                              iconPic: Icons.delete,
-                                              iconBgColor: Colors.red,
-                                              iconColor: Colors.black,
-                                              onTapOnIcon: () {},
-                                            )
-                                          ],
-                                        )
-                                      : Container()
-                                ],
-                              )),
-
-                          LabelForProfile(labelForProfile: '🧑‍ Name'),
-                          InputFieldForProfile(
-                            isEnable: provider.isEditButtonClicked,
-                            hintTextForInputField: "Enter Your Name",
-                          ),
-                          //Email Address
-                          LabelForProfile(labelForProfile: '✉️ Email Address'),
-                          InputFieldForProfile(
-                            isEnable: provider.isEditButtonClicked,
-                            hintTextForInputField: "Enter Email Address",
-                          ),
-                          //Mobile Number
-                          LabelForProfile(labelForProfile: '📱 Mobile Number'),
-                          InputFieldForProfile(
-                            isEnable: provider.isEditButtonClicked,
-                            hintTextForInputField: "Enter Mobile Number",
-                          ),
-                          LabelForProfile(
-                              labelForProfile: '🗼 Contract Address'),
-                          InputFieldForProfile(
-                            isEnable: provider.isEditButtonClicked,
-                            hintTextForInputField: "Enter Contract Address",
-                          ),
-                          !provider.isEditButtonClicked
-                              ? GetActionButtonOn()
-                              : Container(),
-                        ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        );
-      }),
-    );
-  }
-}
-
-class GetIcon extends StatelessWidget {
-  final Color? iconColor;
-  final Color? iconBgColor;
-
-  final IconData? iconPic;
-  final Function? onTapOnIcon;
-
-  GetIcon({this.iconColor, this.iconBgColor, this.iconPic, this.onTapOnIcon});
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 20,
-      backgroundColor: iconBgColor,
-      child: IconButton(
-        icon: Icon(
-          iconPic,
-          color: iconColor,
+                    )
+                  ],
+                ),
+              ],
+            );
+          },
         ),
-        onPressed: () {
-          onTapOnIcon!;
-        },
       ),
     );
   }
 }
 
-class GetActionButtonOn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<EcommerceProvider>(
-      builder: (_, provider, ___) {
-        return Column(
-          children: [
-            LabelForProfile(labelForProfile: '🔑 Changer Your password'),
-            InputFieldForProfile(
-              isEnable: provider.isEditButtonClicked,
-              hintTextForInputField: "Enter New password",
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 45.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 10.0),
-                      child: ButtonDesign(
-                        qButtonColor: Colors.green,
-                        qButtonTittle: 'Save',
-                        qButtonTextColor: Colors.white,
-                        qButtonFunction: () {
-                          provider.isEditButtonClicked = true;
-                        },
-                      ),
-                    ),
-                    flex: 2,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 10.0),
-                      child: ButtonDesign(
-                        qButtonColor: Colors.red,
-                        qButtonTittle: 'Cancel',
-                        qButtonTextColor: Colors.white,
-                        qButtonFunction: () {
-                          provider.isEditButtonClicked = true;
-                        },
-                      ),
-                    ),
-                    flex: 2,
-                  ),
-                ],
-              ),
-            )
-          ],
-        );
-      },
-    );
-  }
-}
+
 
 class InputFieldForProfile extends StatelessWidget {
-  final String ?hintTextForInputField;
-  final bool ?isEnable;
+  final String hintTextForInputField;
+  final bool isEnable;
+  final TextEditingController qTextEditController;
 
-  InputFieldForProfile({this.hintTextForInputField, this.isEnable});
+  InputFieldForProfile(
+      {this.hintTextForInputField, this.isEnable, this.qTextEditController});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<EcommerceProvider>(
-      builder: (_, provider, ___) {
-        return Padding(
-          padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Flexible(
-                child: TextField(
-                  decoration: InputDecoration(hintText: hintTextForInputField),
-                  enabled: !provider.isEditButtonClicked,
-                ),
-              ),
-            ],
+    return Padding(
+      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Flexible(
+            child: TextField(
+              controller: qTextEditController,
+              decoration: InputDecoration(hintText: hintTextForInputField),
+              enabled: isEnable,
+            ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
 
 class LabelForProfile extends StatelessWidget {
-  final String ?labelForProfile;
+  final String labelForProfile;
 
   LabelForProfile({this.labelForProfile});
 
@@ -313,7 +291,7 @@ class LabelForProfile extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                labelForProfile!,
+                labelForProfile,
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ],

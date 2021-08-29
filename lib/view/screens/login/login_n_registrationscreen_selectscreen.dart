@@ -5,14 +5,14 @@ import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/screens/login/login_screen.dart';
 import 'package:wowsell/view/screens/login/registration_screen.dart';
 
-class LoginRegistrationSelectionpage extends StatefulWidget {
+class LoginRegistrationSelectionPage extends StatefulWidget {
   @override
-  _LoginRegistrationSelectionpageState createState() =>
-      _LoginRegistrationSelectionpageState();
+  _LoginRegistrationSelectionPageState createState() =>
+      _LoginRegistrationSelectionPageState();
 }
 
-class _LoginRegistrationSelectionpageState
-    extends State<LoginRegistrationSelectionpage> {
+class _LoginRegistrationSelectionPageState
+    extends State<LoginRegistrationSelectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

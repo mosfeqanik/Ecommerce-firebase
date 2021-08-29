@@ -3,19 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wowsell/components/cart.dart';
 import 'package:wowsell/const/appcolor.dart';
+import 'package:wowsell/view/common_widgets/share_pref.dart';
+import 'package:wowsell/view/screens/login/Profile_View_Update.dart';
+import 'package:wowsell/view/screens/login/add_user_profile.dart';
 import 'package:wowsell/view/screens/login/login_n_registrationscreen_selectscreen.dart';
 import 'package:wowsell/view/screens/mainpage/FavourtiePage.dart';
 import 'package:wowsell/view/screens/mainpage/homepage.dart';
 import 'package:wowsell/view/screens/mainpage/notification_page.dart';
 import 'package:wowsell/view/screens/mainpage/order_page.dart';
+import 'package:wowsell/view/screens/mainpage/search_screen_page.dart';
 
-class NavbarAppbar extends StatefulWidget {
+class BottomNavController extends StatefulWidget {
   @override
-  _NavbarAppbarState createState() => _NavbarAppbarState();
+  _BottomNavControllerState createState() => _BottomNavControllerState();
 }
 
-class _NavbarAppbarState extends State<NavbarAppbar> {
+class _BottomNavControllerState extends State<BottomNavController> {
   var _page = 2;
+  bool isLoggedIn;
 
   final pages = [
     NotificationPage(),
@@ -24,6 +29,12 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
     FavouritePage(),
     Cart(),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +58,11 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
               size: 25,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => SearchScreen()),
+                  (route) => false);
+            },
           ),
           IconButton(
             icon: Icon(
@@ -58,8 +73,7 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => LoginRegistrationSelectionpage()),
+                MaterialPageRoute(builder: (context) => ViewProfilePage()),
               );
             },
           ),
@@ -117,7 +131,14 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
             ),
             Divider(),
             ListTile(
-              title: Text('0.0.1'),
+              leading: InkWell(
+                  onTap: () {
+                    Prefs.clearPref();
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => LoginRegistrationSelectionPage()),
+                        (route) => false);
+                  },
+                  child: Text('LOG OUT')),
             )
           ],
         ),
@@ -158,8 +179,8 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
 }
 
 class CustomListTileforDrawer extends StatelessWidget {
-  IconData? icon;
-  String? textTitle;
+  IconData icon;
+  String textTitle;
 
   CustomListTileforDrawer({this.icon, this.textTitle});
 
@@ -171,7 +192,7 @@ class CustomListTileforDrawer extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Divider(),
-            ListTile(leading: Icon(icon), title: Text(textTitle!)),
+            ListTile(leading: Icon(icon), title: Text(textTitle)),
           ],
         ),
       ),

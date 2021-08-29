@@ -5,8 +5,9 @@ import 'package:flutter/rendering.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
 import 'package:wowsell/view/common_widgets/input_Text_Field.dart';
+import 'package:wowsell/view/common_widgets/share_pref.dart';
 import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
-import 'package:wowsell/view/screens/login/Profile_View_Update.dart';
+import 'package:wowsell/view/screens/login/add_user_profile.dart';
 import 'package:wowsell/view/screens/login/login_screen.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -25,13 +26,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
               email: _emailEditController.text,
               password: _passwordEditController.text);
       var authCredential = userCredential.user;
+      Prefs.setBool(Prefs.IS_LOGGED_IN, true);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => ViewProfilePage()),
+          MaterialPageRoute(builder: (context) => ProfileInfoAddPage()),
               (route) => false);
-      print(authCredential!.uid);
+      print(authCredential.uid);
       if (authCredential.uid.isNotEmpty) {
         print(authCredential.uid);
-        CustomToast.toast('Login is Successful');
+        CustomToast.toast('Registration is Successful');
       } else {
         CustomToast.toast('Something is wrong');
       }
@@ -111,11 +113,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ],
               ),
-              // Text(
-              //   _isBuyer?"Buyer":"Seller",
-              //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
-              // ),
-
               FadeAnimation(
                   1.5,
                   Container(

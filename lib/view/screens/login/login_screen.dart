@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsell/const/appcolor.dart';
@@ -5,7 +6,10 @@ import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/view/common_widgets/animations/fade_animation.dart';
 import 'package:wowsell/view/common_widgets/input_Password_Field.dart';
 import 'package:wowsell/view/common_widgets/input_Text_Field.dart';
+import 'package:wowsell/view/common_widgets/share_pref.dart';
+import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
 import 'package:wowsell/view/screens/login/registration_screen.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,11 +18,40 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isObscure = false;
+  TextEditingController _emailEditController = TextEditingController();
+  TextEditingController _passwordEditController = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
+
+  signIn()async{
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailEditController.text,
+          password: _passwordEditController.text
+      );
+      var authCredential = userCredential.user;
+      Prefs.setBool(Prefs.IS_LOGGED_IN, true);
+      print(authCredential.uid);
+      if(authCredential.uid.isNotEmpty){
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => BottomNavController()),
+                (route) => false);
+      }else{
+        CustomToast.toast('Something is wrong');
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        CustomToast.toast('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        CustomToast.toast('Wrong password provided for that user.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -79,12 +112,14 @@ class _LoginPageState extends State<LoginPage> {
                         FadeAnimation(
                             1.2,
                             InputTextField(
+                              inputTextEditController: _emailEditController,
                               label: "Email",
 
                             )),
                         FadeAnimation(
                             1.3,
                             InputPasswordField(
+                                inputTextEditController: _passwordEditController,
                                 label: "Password", isObscure: isObscure)),
                       ],
                     ),
@@ -105,7 +140,9 @@ class _LoginPageState extends State<LoginPage> {
                           child: MaterialButton(
                             minWidth: double.infinity,
                             height: 60,
-                            onPressed: () {},
+                            onPressed: () {
+                              signIn();
+                            },
                             color: AppColors.qprimarycolor1,
                             elevation: 0,
                             shape: RoundedRectangleBorder(

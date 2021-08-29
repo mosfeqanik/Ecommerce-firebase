@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wowsell/const/appcolor.dart';
+import 'package:wowsell/view/common_widgets/share_pref.dart';
 import 'package:wowsell/view/common_widgets/single_Product_View.dart';
-import 'package:wowsell/view/screens/mainpage/sceach_screen_page.dart';
+import 'package:wowsell/view/screens/login/login_n_registrationscreen_selectscreen.dart';
+import 'package:wowsell/view/screens/mainpage/search_screen_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,10 +21,11 @@ class _HomePageState extends State<HomePage> {
   List _products = [];
   var _dotPosition = 0;
   var _fireStoreInstance = FirebaseFirestore.instance;
+  bool isLoggedIn;
 
   fetchCarouselImage() async {
     QuerySnapshot carouselCollection =
-    await _fireStoreInstance.collection("carousel_slider").get();
+        await _fireStoreInstance.collection("carousel_slider").get();
     setState(() {
       for (int i = 0; i < carouselCollection.docs.length; i++) {
         _carouselImages.add(carouselCollection.docs[i]["img_path"]);
@@ -33,20 +36,25 @@ class _HomePageState extends State<HomePage> {
 
   fetchProduct() async {
     QuerySnapshot productCollection =
-    await _fireStoreInstance.collection("products").get();
+        await _fireStoreInstance.collection("products").get();
     setState(() {
       for (int i = 0; i < productCollection.docs.length; i++) {
         _products.add({
           "product_name": productCollection.docs[i]["product_name"],
           "product_img": productCollection.docs[i]["product_img"],
           "product_description": productCollection.docs[i]
-          ["product_description"],
+              ["product_description"],
           "product_price": productCollection.docs[i]["product_price"],
         });
       }
     });
 
     return productCollection.docs;
+  }
+
+  void setPref() async {
+    await Prefs.loadPref();
+    isLoggedIn = Prefs.getBool(Prefs.IS_LOGGED_IN, def: false);
   }
 
   @override
@@ -71,26 +79,35 @@ class _HomePageState extends State<HomePage> {
                     child: SizedBox(
                       height: 50.h,
                       child: TextFormField(
-                        readOnly: true,
-                        decoration: InputDecoration(
-                            fillColor: Colors.white,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(0)),
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(0)),
-                              borderSide: BorderSide(color: Colors.grey),
-                            ),
-                            hintText: "Search Products here",
-                            hintStyle: TextStyle(fontSize: 15.sp)),
-                        onTap: () => Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (__) => SearchScreen())),
-                      ),
+                          readOnly: true,
+                          decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0)),
+                                borderSide: BorderSide(color: Colors.blue),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              hintText: "Search Products here",
+                              hintStyle: TextStyle(fontSize: 15.sp)),
+                          onTap: () {
+                            if (!isLoggedIn) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchScreen()),
+                                  (route) => false);
+                            } else {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          LoginRegistrationSelectionPage()),
+                                  (route) => false);
+                            }
+                          }),
                     ),
                   ),
                   Container(
@@ -98,8 +115,20 @@ class _HomePageState extends State<HomePage> {
                     width: 50.h,
                     color: AppColors.qblack,
                     child: InkWell(
-                      onTap: () => Navigator.push(context,
-                          CupertinoPageRoute(builder: (__) => SearchScreen())),
+                      onTap: () {
+                        if (!isLoggedIn) {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => SearchScreen()),
+                              (route) => false);
+                        } else {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LoginRegistrationSelectionPage()),
+                              (route) => false);
+                        }
+                      },
                       child: Icon(
                         Icons.search,
                         color: Colors.white,
@@ -116,18 +145,18 @@ class _HomePageState extends State<HomePage> {
                 items: _carouselImages
                     .map(
                       (item) => Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: NetworkImage(item),
-                          fit: BoxFit.cover,
+                        padding: EdgeInsets.all(5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: NetworkImage(item),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                )
+                    )
                     .toList(),
                 options: CarouselOptions(
                     autoPlayCurve: Curves.fastOutSlowIn,
@@ -147,7 +176,7 @@ class _HomePageState extends State<HomePage> {
             ),
             DotsIndicator(
               dotsCount:
-              _carouselImages.length == 0 ? 1 : _carouselImages.length,
+                  _carouselImages.length == 0 ? 1 : _carouselImages.length,
               position: _dotPosition.toDouble(),
               decorator: DotsDecorator(
                 activeColor: AppColors.qblack,
@@ -165,11 +194,15 @@ class _HomePageState extends State<HomePage> {
                       crossAxisCount: 2, childAspectRatio: 1),
                   itemBuilder: (_, index) {
                     return GestureDetector(
-                      onTap: () => Navigator.push(
+                      onTap: () {
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) =>
-                                  ProductDetailScreen(_products[index]))),
+                            builder: (_) =>
+                                ProductDetailScreen(_products[index]),
+                          ),
+                        );
+                      },
                       child: Card(
                         elevation: 3,
                         child: Column(
@@ -183,10 +216,10 @@ class _HomePageState extends State<HomePage> {
                                     return progress == null
                                         ? child
                                         : LinearProgressIndicator(
-                                        backgroundColor: Colors.white,
-                                        valueColor:
-                                        AlwaysStoppedAnimation<Color>(
-                                            Colors.greenAccent));
+                                            backgroundColor: Colors.white,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    Colors.greenAccent));
                                   },
                                 ),
                               ),

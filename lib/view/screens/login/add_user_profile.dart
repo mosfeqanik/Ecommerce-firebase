@@ -1,16 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
-import 'package:wowsell/view/common_widgets/buttonStyle.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileInfoAddPage extends StatefulWidget {
+
   @override
   _ProfileInfoAddPageState createState() => _ProfileInfoAddPageState();
 }
 
 class _ProfileInfoAddPageState extends State<ProfileInfoAddPage> {
+  TextEditingController _nameEditController = TextEditingController();
+  TextEditingController _phoneNumberEditController = TextEditingController();
+  TextEditingController _addressEditController = TextEditingController();
+
+  sendUserDataToDB()async{
+
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var  currentUser = _auth.currentUser;
+
+    CollectionReference _collectionRef = FirebaseFirestore.instance.collection("users-form-data");
+    return _collectionRef.doc(currentUser.email).set({
+      "name":_nameEditController.text,
+      "phone":_phoneNumberEditController.text,
+      "address":_addressEditController.text,
+    }).then((value) => Navigator.push(context, MaterialPageRoute(builder: (_)=>BottomNavController()))).catchError((error)=>print("something is wrong. $error"));
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +80,7 @@ class _ProfileInfoAddPageState extends State<ProfileInfoAddPage> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                      image: AssetImage('assets/images/as.png'),
+                                      image: AssetImage('assets/images/Profilepic.png'),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -117,29 +139,76 @@ class _ProfileInfoAddPageState extends State<ProfileInfoAddPage> {
                                 ],
                               )),
                           LabelForProfile(labelForProfile: '🧑‍ Name'),
-                          InputFieldForProfile(
-                            isEnable: true,
-                            hintTextForInputField: "Enter Your Name",
+                          Padding(
+                            padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Flexible(
+                                  child: TextField(
+                                    controller: _nameEditController,
+                                    decoration: InputDecoration(hintText: "Enter Your Name"),
+                                    enabled: true,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          //Email Address
-                          LabelForProfile(labelForProfile: '✉️ Email Address'),
-                          InputFieldForProfile(
-                            isEnable: true,
-                            hintTextForInputField: "Enter Email Address",
-                          ),
+
                           //Mobile Number
                           LabelForProfile(labelForProfile: '📱 Mobile Number'),
-                          InputFieldForProfile(
-                            isEnable: true,
-                            hintTextForInputField: "Enter Mobile Number",
+                          Padding(
+                            padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Flexible(
+                                  child: TextField(
+                                    controller: _phoneNumberEditController,
+                                    decoration: InputDecoration(hintText: "Enter Mobile Number"),
+                                    enabled: true,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           LabelForProfile(
                               labelForProfile: '🗼 Contract Address'),
-                          InputFieldForProfile(
-                            isEnable: true,
-                            hintTextForInputField: "Enter Contract Address",
+                          Padding(
+                            padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Flexible(
+                                  child: TextField(
+                                    controller: _addressEditController,
+                                    decoration: InputDecoration(hintText: "Enter Contract Address"),
+                                    enabled: true,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                           GetActionButtonOn()
+                          SizedBox(height: 20.h,),
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 10.0),
+                              child:MaterialButton(
+                                color: Colors.green,
+                                elevation: 0,
+                                height: 50.h,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(10)),
+                                onPressed: () { sendUserDataToDB(); },
+                                child: Text(
+                                  'Save',
+                                  style: TextStyle(color: Colors.white,
+                                      fontWeight: FontWeight.w600, fontSize: 18),
+                                ),
+                              )
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -153,54 +222,13 @@ class _ProfileInfoAddPageState extends State<ProfileInfoAddPage> {
   }
 }
 
-class GetActionButtonOn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 45.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: ButtonDesign(
-                qButtonColor: Colors.green,
-                qButtonTittle: 'Save',
-                qButtonTextColor: Colors.white,
-                qButtonFunction: () {
-
-                },
-              ),
-            ),
-            flex: 2,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: ButtonDesign(
-                qButtonColor: Colors.red,
-                qButtonTittle: 'Cancel',
-                qButtonTextColor: Colors.white,
-                qButtonFunction: () {
-
-                },
-              ),
-            ),
-            flex: 2,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class InputFieldForProfile extends StatelessWidget {
-  final String ?hintTextForInputField;
-  final bool ?isEnable;
+  final String hintTextForInputField;
+  final bool isEnable;
+  final TextEditingController qTextEditController;
+  final String qkeyboardType;
 
-  InputFieldForProfile({this.hintTextForInputField, this.isEnable});
+  InputFieldForProfile({this.hintTextForInputField, this.isEnable,this.qTextEditController,this.qkeyboardType});
 
   @override
   Widget build(BuildContext context) {
@@ -213,6 +241,7 @@ class InputFieldForProfile extends StatelessWidget {
             children: <Widget>[
               Flexible(
                 child: TextField(
+                  controller: qTextEditController,
                   decoration: InputDecoration(hintText: hintTextForInputField),
                   enabled: !provider.isEditButtonClicked,
                 ),
@@ -226,7 +255,7 @@ class InputFieldForProfile extends StatelessWidget {
 }
 
 class LabelForProfile extends StatelessWidget {
-  final String ?labelForProfile;
+  final String labelForProfile;
 
   LabelForProfile({this.labelForProfile});
 
@@ -242,7 +271,7 @@ class LabelForProfile extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                labelForProfile!,
+                labelForProfile,
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ],

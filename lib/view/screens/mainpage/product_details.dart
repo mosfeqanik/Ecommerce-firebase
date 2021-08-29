@@ -25,7 +25,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     CollectionReference _collectionRef =
     FirebaseFirestore.instance.collection("users-cart-items");
     return _collectionRef
-        .doc(currentUser!.email)
+        .doc(currentUser.email)
         .collection("items")
         .doc()
         .set({
@@ -35,29 +35,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     }).then((value) => CustomToast.toast('Added to Cart'));
   }
 
-  Future checkOutNow() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentUser = _auth.currentUser;
-    CollectionReference _collectionRef =
-    FirebaseFirestore.instance.collection("users-checkout-items");
-    return _collectionRef
-        .doc(currentUser!.email)
-        .collection("items")
-        .doc()
-        .set({
-      "name": widget._products["product_name"],
-      "price": widget._products["product_price"],
-      "images": widget._products["product_img"],
-    }).then((value) => CustomToast.toast('Added to Checkout'));
-  }
-
   Future addToFavourite() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     var currentUser = _auth.currentUser;
     CollectionReference _collectionRef =
     FirebaseFirestore.instance.collection("users-favourite-items");
     return _collectionRef
-        .doc(currentUser!.email)
+        .doc(currentUser.email)
         .collection("items")
         .doc()
         .set({
@@ -140,7 +124,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection("users-favourite-items")
-                                .doc(FirebaseAuth.instance.currentUser!.email)
+                                .doc(FirebaseAuth.instance.currentUser.email)
                                 .collection("items")
                                 .where("name",
                                 isEqualTo: widget._products['product_name'])
@@ -262,7 +246,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection("users-cart-items")
-                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .doc(FirebaseAuth.instance.currentUser.email)
                       .collection("items")
                       .where("name",
                       isEqualTo: widget._products['product_name'])
