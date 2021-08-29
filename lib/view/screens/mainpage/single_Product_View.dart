@@ -35,6 +35,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     }).then((value) => CustomToast.toast('Added to Cart'));
   }
 
+  Future checkOutNow() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentUser = _auth.currentUser;
+    CollectionReference _collectionRef =
+    FirebaseFirestore.instance.collection("users-checkout-items");
+    return _collectionRef
+        .doc(currentUser.email)
+        .collection("items")
+        .doc()
+        .set({
+      "name": widget._products["product_name"],
+      "price": widget._products["product_price"],
+      "images": widget._products["product_img"],
+    }).then((value) => CustomToast.toast('Added to Checkout'));
+  }
+
   Future addToFavourite() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     var currentUser = _auth.currentUser;

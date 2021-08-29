@@ -7,7 +7,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/view/common_widgets/share_pref.dart';
-import 'package:wowsell/view/common_widgets/single_Product_View.dart';
+import 'package:wowsell/view/screens/mainpage/single_Product_View.dart';
 import 'package:wowsell/view/screens/login/login_n_registrationscreen_selectscreen.dart';
 import 'package:wowsell/view/screens/mainpage/search_screen_page.dart';
 
