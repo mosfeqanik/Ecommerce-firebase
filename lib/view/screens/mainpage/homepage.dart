@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             AspectRatio(
-                              aspectRatio: 4 / 3,
+                              aspectRatio: 1.30,
                               child: Container(
                                 child: Image.network(
                                   _products[index]["product_img"][0],
@@ -194,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               "${_products[index]["product_name"]}",
                               style: TextStyle(
-                                  fontSize: 22.sp, fontWeight: FontWeight.bold),
+                                  fontSize: 18.sp, fontWeight: FontWeight.bold),
                             ),
                             Text(
                                 "${_products[index]["product_price"].toString()}"),

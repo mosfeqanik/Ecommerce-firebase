@@ -15,7 +15,7 @@ class NavbarAppbar extends StatefulWidget {
 }
 
 class _NavbarAppbarState extends State<NavbarAppbar> {
-  var _page = 1;
+  var _page = 2;
 
   final pages = [
     NotificationPage(),
@@ -95,23 +95,23 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
                 ),
               ),
             ),
-            CustomListTile(
+            CustomListTileforDrawer(
               icon: Icons.person,
               textTitle: "Group Members",
             ),
-            CustomListTile(
+            CustomListTileforDrawer(
               icon: Icons.star,
               textTitle: "Md Mosfeq Anik",
             ),
-            CustomListTile(
+            CustomListTileforDrawer(
               icon: Icons.star,
               textTitle: "Pritom Chowdhury",
             ),
-            CustomListTile(
+            CustomListTileforDrawer(
               icon: Icons.engineering,
               textTitle: "Supervised By",
             ),
-            CustomListTile(
+            CustomListTileforDrawer(
               icon: Icons.assistant_photo,
               textTitle: "Ebrahim Joy",
             ),
@@ -137,23 +137,18 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
         items: [
           Icon(
             FontAwesomeIcons.tag,
-            size: 25,
           ),
           Icon(
             Icons.bookmark_outlined,
-            size: 25,
           ),
           Icon(
             Icons.house,
-            size: 25,
           ),
           Icon(
             Icons.favorite_outlined,
-            size: 25,
           ),
           Icon(
             Icons.shopping_cart,
-            size: 25,
           ),
         ],
       ),
@@ -162,11 +157,11 @@ class _NavbarAppbarState extends State<NavbarAppbar> {
   }
 }
 
-class CustomListTile extends StatelessWidget {
+class CustomListTileforDrawer extends StatelessWidget {
   IconData? icon;
   String? textTitle;
 
-  CustomListTile({this.icon, this.textTitle});
+  CustomListTileforDrawer({this.icon, this.textTitle});
 
   @override
   Widget build(BuildContext context) {
