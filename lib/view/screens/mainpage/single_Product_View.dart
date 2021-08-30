@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wowsell/const/appcolor.dart';
+import 'package:wowsell/database/database_helper.dart';
+import 'package:wowsell/model/Product_List.dart';
+import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
 import 'package:wowsell/view/screens/mainpage/cart_page.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -17,6 +19,33 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  DatabaseHelper _db = DatabaseHelper();
+  bool isLoading = false;
+
+  addToCart() async {
+    ProductList product = ProductList(
+      productName: widget._products['product_name'],
+      productImg: widget._products['product_img'][0],
+      productPrice:  widget._products['product_price'].toString(),
+    );
+    var isAdded = await _db.addProductToCart(product);
+    if (isAdded != null) {
+      CustomToast.toast('Product added to cart successfully ');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CartPage()),
+      );
+    } else {
+      CustomToast.toast('Product can not be added to cart right now');
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -188,11 +217,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CartPage()),
-                    );
-                    print("i am add cart ");
+                    addToCart();
                   },
                   child: Container(
                     height: 50.0,
