@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wowsell/const/appcolor.dart';
+import 'package:wowsell/view/screens/mainpage/cart_page.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   var _products;
@@ -187,6 +188,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
                 InkWell(
                   onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CartPage()),
+                    );
                     print("i am add cart ");
                   },
                   child: Container(
