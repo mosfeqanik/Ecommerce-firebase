@@ -35,18 +35,9 @@ class DatabaseHelper {
     });
   }
 
-  // Future<int> deleteNote(int id) async {
-  //   final db = await initDatabase();
-  //   return await db.delete('note', where: "id = ?", whereArgs: [id]);
-  // }
+  Future<int> deleteProduct(int id) async {
+    final db = await initDatabase();
+    return await db.delete('addToCart', where: "id = ?", whereArgs: [id]);
+  }
 
-  // Future<int> updateNote(NoteBook noteBook) async {
-  //   final db = await initDatabase();
-  //   return await db.update('note', noteBook.toMap(),
-  //       where: "id = ?", whereArgs: [noteBook.id]);
-  // }
-  // Future<int> deleteTable() async {
-  //   final db = await initDatabase();
-  //   return await db.delete('note');
-  // }
 }

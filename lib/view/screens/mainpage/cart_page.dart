@@ -5,38 +5,51 @@ import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/database/database_helper.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/model/Product_List.dart';
+import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
 
 class CartPage extends StatefulWidget {
-
   @override
   _CartPageState createState() => _CartPageState();
 }
 
-
 class _CartPageState extends State<CartPage> {
   DatabaseHelper _db = DatabaseHelper();
-  bool isLoading=false;
+  bool isLoading = true;
+  var providerProductPage;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    providerProductPage =
+        Provider.of<EcommerceProvider>(context, listen: false);
     fetchAddedCartProductList();
-
   }
+
   Future<void> fetchAddedCartProductList() async {
-    var providerHomePage = Provider.of<EcommerceProvider>(
-        context, listen: false);
     try {
       var products = await _db.fetchProductAddToCardList();
       if (products.length > 0) {
-        Provider
-            .of<EcommerceProvider>(context, listen: false)
-            .productlists = products;
-        providerHomePage.isLoading = false;
+        Provider.of<EcommerceProvider>(context, listen: false).productlists =
+            products;
+        providerProductPage.isLoading = true;
         print('success');
       }
     } catch (error) {
-      providerHomePage.isLoading = false;
+      providerProductPage.isLoading = false;
+    }
+  }
+
+  void onDelete(int id) async {
+    int isDeleted = await _db.deleteProduct(id);
+    if (isDeleted == 1) {
+      CustomToast.toast('Note deleted');
+      providerProductPage.isLoading = false;
+      fetchAddedCartProductList();
+    } else {
+      CustomToast.toast('Note not deleted');
+      providerProductPage.isLoading = false;
+      fetchAddedCartProductList();
     }
   }
 
@@ -65,48 +78,47 @@ class _CartPageState extends State<CartPage> {
         toolbarHeight: 80.h,
       ),
       body: SafeArea(
-        child: Consumer<EcommerceProvider>(
-         builder: (_,productProvider,___){
-           return SingleChildScrollView(
-               child:!productProvider.isLoading?
-               productProvider.productlists.contains(null) ||
-                   productProvider.productlists.length <= 0?
-               Container(
-                   child: Center(
-                       child: Text("You have not added anything in cart",style:
-                   TextStyle(fontSize: 20.h),),),):ListView.separated(
-                 separatorBuilder: (context, index) =>
-                     SizedBox(
-                       height: 5,
-                     ),
-                 shrinkWrap: true,
-                 physics: NeverScrollableScrollPhysics(),
-                 itemCount: productProvider.productlists.length,
-                 itemBuilder: (context, index) {
-                   return productListItem(productProvider.productlists[index]);
-                 },
-               )
-
-                   :Center(
-               child: CircularProgressIndicator(
-                 valueColor: AlwaysStoppedAnimation<Color>(
-                     AppColors.qblack),
-               ),
-             )
-
-           );
-         }
-        ),
-
+        child: Consumer<EcommerceProvider>(builder: (_, productProvider, ___) {
+          return SingleChildScrollView(
+              child: productProvider.isLoading
+                  ? productProvider.productlists.contains(null) ||
+                          productProvider.productlists.length <= 0
+                      ? Container(
+                          child: Center(
+                            child: Text(
+                              "You have not added anything in cart",
+                              style: TextStyle(fontSize: 20.h),
+                            ),
+                          ),
+                        )
+                      : ListView.separated(
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: 5,
+                          ),
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: productProvider.productlists.length,
+                          itemBuilder: (context, index) {
+                            return productListItem(
+                                productProvider.productlists[index]);
+                          },
+                        )
+                  : Center(
+                      child: CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(AppColors.qblack),
+                      ),
+                    ));
+        }),
       ),
     );
   }
+
   Padding productListItem(ProductList products) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(4,0,4,0),
+      padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
       child: Container(
-        margin:
-        EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 5),
+        margin: EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 5),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -149,8 +161,7 @@ class _CartPageState extends State<CartPage> {
                 children: [
                   Text(
                     products.productName,
-                    style: TextStyle(
-                        color: Colors.black, fontSize: 26.h),
+                    style: TextStyle(color: Colors.black, fontSize: 26.h),
                     maxLines: 2,
                   ),
                   SizedBox(height: 10),
@@ -167,7 +178,9 @@ class _CartPageState extends State<CartPage> {
               ),
               Spacer(),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    onDelete(products.id);
+                  },
                   icon: Icon(Icons.remove))
             ],
           ),
