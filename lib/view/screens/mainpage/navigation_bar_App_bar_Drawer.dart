@@ -1,13 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:wowsell/components/cart.dart';
 import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/view/common_widgets/share_pref.dart';
 import 'package:wowsell/view/screens/login/Profile_View_Update.dart';
-import 'package:wowsell/view/screens/login/add_user_profile.dart';
 import 'package:wowsell/view/screens/login/login_n_registrationscreen_selectscreen.dart';
 import 'package:wowsell/view/screens/mainpage/FavourtiePage.dart';
+import 'package:wowsell/view/screens/mainpage/cart_page.dart';
 import 'package:wowsell/view/screens/mainpage/homepage.dart';
 import 'package:wowsell/view/screens/mainpage/notification_page.dart';
 import 'package:wowsell/view/screens/mainpage/order_page.dart';
@@ -27,7 +26,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
     OrderPage(),
     HomePage(),
     FavouritePage(),
-    Cart(),
+    CartPage(),
   ];
 
   @override
@@ -109,23 +108,23 @@ class _BottomNavControllerState extends State<BottomNavController> {
                 ),
               ),
             ),
-            CustomListTileforDrawer(
+            CustomListTileForDrawer(
               icon: Icons.person,
               textTitle: "Group Members",
             ),
-            CustomListTileforDrawer(
+            CustomListTileForDrawer(
               icon: Icons.star,
               textTitle: "Md Mosfeq Anik",
             ),
-            CustomListTileforDrawer(
+            CustomListTileForDrawer(
               icon: Icons.star,
               textTitle: "Pritom Chowdhury",
             ),
-            CustomListTileforDrawer(
+            CustomListTileForDrawer(
               icon: Icons.engineering,
               textTitle: "Supervised By",
             ),
-            CustomListTileforDrawer(
+            CustomListTileForDrawer(
               icon: Icons.assistant_photo,
               textTitle: "Ebrahim Joy",
             ),
@@ -178,11 +177,11 @@ class _BottomNavControllerState extends State<BottomNavController> {
   }
 }
 
-class CustomListTileforDrawer extends StatelessWidget {
+class CustomListTileForDrawer extends StatelessWidget {
   IconData icon;
   String textTitle;
 
-  CustomListTileforDrawer({this.icon, this.textTitle});
+  CustomListTileForDrawer({this.icon, this.textTitle});
 
   @override
   Widget build(BuildContext context) {
