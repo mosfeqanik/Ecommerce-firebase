@@ -35,15 +35,13 @@ class _CartPageState extends State<CartPage> {
             products;
         providerProductPage.isLoading = true;
         print('success');
-      }else if(products.length <= 0){
+      } else if (products.length <= 0) {
         providerProductPage.resetTotal();
       }
     } catch (error) {
       providerProductPage.isLoading = false;
     }
   }
-
-
 
   void onDelete(int id) async {
     int isDeleted = await _db.deleteProduct(id);
@@ -86,7 +84,10 @@ class _CartPageState extends State<CartPage> {
         margin: EdgeInsets.only(right: 20, bottom: 20),
         child: FloatingActionButton(
             elevation: 0.0,
-            child: Icon(Icons.done_outlined,color: Colors.black,),
+            child: Icon(
+              Icons.done_outlined,
+              color: Colors.black,
+            ),
             backgroundColor: AppColors.qprimarycolor1,
             onPressed: () async {
               Navigator.push(
@@ -130,21 +131,18 @@ class _CartPageState extends State<CartPage> {
                           valueColor:
                               AlwaysStoppedAnimation<Color>(AppColors.qblack),
                         ),
-
                       ),
               );
             }),
-            Consumer<EcommerceProvider>(
-              builder: (_,totalProvider,___){
-                return Container(
-                  margin: EdgeInsets.fromLTRB(40, 0, 0, 30),
-                  child: Text(
-                    "Total : ${totalProvider.total.toString()}",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                  ),
-                );
-              }
-            ),
+            Consumer<EcommerceProvider>(builder: (_, totalProvider, ___) {
+              return Container(
+                margin: EdgeInsets.fromLTRB(40, 0, 0, 30),
+                child: Text(
+                  "Total : ${totalProvider.total.toString()}",
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                ),
+              );
+            }),
           ],
         ),
       ),
@@ -214,17 +212,15 @@ class _CartPageState extends State<CartPage> {
                 ],
               ),
               Spacer(),
-              Consumer<EcommerceProvider>(
-                builder: (_,totalProvider,___){
-                  return IconButton(
-                      onPressed: () {
-                        onDelete(products.id);
-                        String totalprice=products.productPrice.toString();
-                        totalProvider.decrement(price: totalprice);
-                      },
-                      icon: Icon(Icons.remove));
-                }
-              )
+              Consumer<EcommerceProvider>(builder: (_, totalProvider, ___) {
+                return IconButton(
+                    onPressed: () {
+                      onDelete(products.id);
+                      String totalprice = products.productPrice.toString();
+                      totalProvider.decrement(price: totalprice);
+                    },
+                    icon: Icon(Icons.remove));
+              })
             ],
           ),
         ),
