@@ -3,10 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/database/database_helper.dart';
+import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/model/Product_List.dart';
+import 'package:wowsell/model/singleProvider.dart';
 import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
+import 'package:wowsell/view/screens/mainpage/FavourtiePage.dart';
 import 'package:wowsell/view/screens/mainpage/cart_page.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -21,6 +25,7 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   DatabaseHelper _db = DatabaseHelper();
   bool isLoading = false;
+
 
   addToCart() async {
     ProductList product = ProductList(
@@ -39,6 +44,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       CustomToast.toast('Product can not be added to cart right now');
     }
   }
+
+
+
+
 
   @override
   void initState() {
@@ -119,10 +128,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             padding: const EdgeInsets.only(right: 8),
                             child: IconButton(
                               onPressed: () {
-                                print('I am favourite');
+                                // addProductToFavourite();
                               },
                               icon: Icon(
-                                Icons.favorite,
+                                Icons.favorite_outline,
                                 color: AppColors.qblack,
                               ),
                             ),
@@ -188,59 +197,64 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             SizedBox(
               height: 40.0,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  height: 50.0,
-                  width: 220.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: AppColors.qblack,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0, 2),
-                          blurRadius: 20.0,
-                        )
-                      ]),
-                  child: Center(
-                    child: Text(
-                      'Buy Now',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 20.0,
+            Consumer<EcommerceProvider>(
+              builder: (_,provider,___){
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 50.0,
+                      width: 220.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: AppColors.qblack,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(0, 2),
+                              blurRadius: 20.0,
+                            )
+                          ]),
+                      child: Center(
+                        child: Text(
+                          'Buy Now',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    addToCart();
-                  },
-                  child: Container(
-                    height: 50.0,
-                    width: 100.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: AppColors.qblack,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            offset: Offset(0, 2),
-                            blurRadius: 20.0,
-                          )
-                        ]),
-                    child: Center(
-                        child: Icon(
-                      Icons.shopping_bag_outlined,
-                      color: Colors.white,
-                      size: 30.0,
-                    )),
-                  ),
-                ),
-              ],
+                    InkWell(
+                      onTap: () {
+                        addToCart();
+                        provider.increment(price:widget._products['product_price'].toString());
+                      },
+                      child: Container(
+                        height: 50.0,
+                        width: 100.0,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: AppColors.qblack,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(0, 2),
+                                blurRadius: 20.0,
+                              )
+                            ]),
+                        child: Center(
+                            child: Icon(
+                              Icons.shopping_bag_outlined,
+                              color: Colors.white,
+                              size: 30.0,
+                            )),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
             SizedBox(
               height: 20.h,

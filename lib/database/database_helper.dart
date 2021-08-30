@@ -13,6 +13,9 @@ class DatabaseHelper {
       await db.execute(
           "CREATE TABLE addToCart(id INTEGER PRIMARY KEY AUTOINCREMENT,productName TEXT,productImg TEXT, productPrice TEXT)"
           "");
+      await db.execute(
+          "CREATE TABLE addToFavourite(id INTEGER PRIMARY KEY AUTOINCREMENT,productName TEXT,productImg TEXT, productPrice TEXT)"
+              "");
     });
   }
 
@@ -24,7 +27,6 @@ class DatabaseHelper {
   Future<List<ProductList>> fetchProductAddToCardList() async {
     final db = await initDatabase();
     final maps = await db.query('addToCart');
-
     return List.generate(maps.length, (index) {
       return ProductList(
         id: maps[index]['id'],

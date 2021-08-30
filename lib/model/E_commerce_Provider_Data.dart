@@ -14,7 +14,6 @@ class EcommerceProvider extends ChangeNotifier {
   bool _isEditButtonClicked = true;
 
   bool get isEditButtonClicked => _isEditButtonClicked;
-
   set isEditButtonClicked(bool value) {
     _isEditButtonClicked = value;
     notifyListeners();
@@ -32,6 +31,30 @@ class EcommerceProvider extends ChangeNotifier {
     _isLoading = value;
     notifyListeners();
   }
+
+  double _total = 0;
+  double get total => _total;
+  set total(double value) {
+    _total = value;
+    notifyListeners();
+  }
+
+  resetTotal(){
+    _total=0;
+  }
+
+  increment({String price}){
+    _total += double.parse(price);
+    notifyListeners();
+  }
+  decrement({String price}){
+    _total -= double.parse(price);
+    notifyListeners();
+  }
+
+
+
+
 
 
 }

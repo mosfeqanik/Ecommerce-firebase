@@ -6,6 +6,7 @@ import 'package:wowsell/database/database_helper.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/model/Product_List.dart';
 import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
+import 'package:wowsell/view/screens/mainpage/checkOutPage.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -34,20 +35,24 @@ class _CartPageState extends State<CartPage> {
             products;
         providerProductPage.isLoading = true;
         print('success');
+      }else if(products.length <= 0){
+        providerProductPage.resetTotal();
       }
     } catch (error) {
       providerProductPage.isLoading = false;
     }
   }
 
+
+
   void onDelete(int id) async {
     int isDeleted = await _db.deleteProduct(id);
     if (isDeleted == 1) {
-      CustomToast.toast('Note deleted');
+      CustomToast.toast('Product removed from cart');
       providerProductPage.isLoading = false;
       fetchAddedCartProductList();
     } else {
-      CustomToast.toast('Note not deleted');
+      CustomToast.toast('Product can not be removed from cart right now');
       providerProductPage.isLoading = false;
       fetchAddedCartProductList();
     }
@@ -77,39 +82,71 @@ class _CartPageState extends State<CartPage> {
         elevation: 0,
         toolbarHeight: 80.h,
       ),
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(right: 20, bottom: 20),
+        child: FloatingActionButton(
+            elevation: 0.0,
+            child: Icon(Icons.done_outlined,color: Colors.black,),
+            backgroundColor: AppColors.qprimarycolor1,
+            onPressed: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CheckOutPage()),
+              );
+            }),
+      ),
       body: SafeArea(
-        child: Consumer<EcommerceProvider>(builder: (_, productProvider, ___) {
-          return SingleChildScrollView(
-              child: productProvider.isLoading
-                  ? productProvider.productlists.contains(null) ||
-                          productProvider.productlists.length <= 0
-                      ? Container(
-                          child: Center(
-                            child: Text(
-                              "You have not added anything in cart",
-                              style: TextStyle(fontSize: 20.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Consumer<EcommerceProvider>(builder: (_, productProvider, ___) {
+              return SingleChildScrollView(
+                child: productProvider.isLoading
+                    ? productProvider.productlists.contains(null) ||
+                            productProvider.productlists.length <= 0
+                        ? Container(
+                            child: Center(
+                              child: Text(
+                                "You have not added anything in cart",
+                                style: TextStyle(fontSize: 20.h),
+                              ),
                             ),
-                          ),
-                        )
-                      : ListView.separated(
-                          separatorBuilder: (context, index) => SizedBox(
-                            height: 5,
-                          ),
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: productProvider.productlists.length,
-                          itemBuilder: (context, index) {
-                            return productListItem(
-                                productProvider.productlists[index]);
-                          },
-                        )
-                  : Center(
-                      child: CircularProgressIndicator(
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(AppColors.qblack),
+                          )
+                        : ListView.separated(
+                            separatorBuilder: (context, index) => SizedBox(
+                              height: 5,
+                            ),
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: productProvider.productlists.length,
+                            itemBuilder: (context, index) {
+                              return productListItem(
+                                  productProvider.productlists[index]);
+                            },
+                          )
+                    : Center(
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(AppColors.qblack),
+                        ),
+
                       ),
-                    ));
-        }),
+              );
+            }),
+            Consumer<EcommerceProvider>(
+              builder: (_,totalProvider,___){
+                return Container(
+                  margin: EdgeInsets.fromLTRB(40, 0, 0, 30),
+                  child: Text(
+                    "Total : ${totalProvider.total.toString()}",
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                  ),
+                );
+              }
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -177,11 +214,17 @@ class _CartPageState extends State<CartPage> {
                 ],
               ),
               Spacer(),
-              IconButton(
-                  onPressed: () {
-                    onDelete(products.id);
-                  },
-                  icon: Icon(Icons.remove))
+              Consumer<EcommerceProvider>(
+                builder: (_,totalProvider,___){
+                  return IconButton(
+                      onPressed: () {
+                        onDelete(products.id);
+                        String totalprice=products.productPrice.toString();
+                        totalProvider.decrement(price: totalprice);
+                      },
+                      icon: Icon(Icons.remove));
+                }
+              )
             ],
           ),
         ),
