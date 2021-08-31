@@ -7,6 +7,7 @@ import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/model/Product_List.dart';
 import 'package:wowsell/view/common_widgets/utils/custom_toast.dart';
 import 'package:wowsell/view/screens/mainpage/checkOutPage.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -22,19 +23,18 @@ class _CartPageState extends State<CartPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    providerProductPage =
-        Provider.of<EcommerceProvider>(context, listen: false);
     fetchAddedCartProductList();
   }
 
   Future<void> fetchAddedCartProductList() async {
+    providerProductPage =
+        Provider.of<EcommerceProvider>(context, listen: false);
     try {
       var products = await _db.fetchProductAddToCardList();
       if (products.length > 0) {
         Provider.of<EcommerceProvider>(context, listen: false).productlists =
             products;
         providerProductPage.isLoading = true;
-        print('success');
       } else if (products.length <= 0) {
         providerProductPage.resetTotal();
       }
@@ -64,7 +64,10 @@ class _CartPageState extends State<CartPage> {
           icon: Icon(Icons.arrow_back_ios_outlined),
           color: Colors.black,
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BottomNavController()),
+            );
           },
         ),
         title: Column(
@@ -216,8 +219,11 @@ class _CartPageState extends State<CartPage> {
                 return IconButton(
                     onPressed: () {
                       onDelete(products.id);
-                      String totalprice = products.productPrice.toString();
-                      totalProvider.decrement(price: totalprice);
+                      String totalPrice = products.productPrice.toString();
+                      totalProvider.decrement(price: totalPrice);
+                      if (int.parse(totalPrice) > 0) {
+                        providerProductPage.resetTotal();
+                      }
                     },
                     icon: Icon(Icons.remove));
               })

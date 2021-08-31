@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -43,6 +45,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     } else {
       CustomToast.toast('Product can not be added to cart right now');
     }
+  }
+
+  Future addToFavourite() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentUser = _auth.currentUser;
+    CollectionReference _collectionRef =
+    FirebaseFirestore.instance.collection("users-favourite-items");
+    return _collectionRef
+        .doc(currentUser.email)
+        .collection("items")
+        .doc()
+        .set({
+      "name": widget._products["product_name"],
+      "price": widget._products["product_price"],
+      "images": widget._products["product_img"],
+    }).then((value) => CustomToast.toast('Added to favourite'));
   }
 
 
@@ -124,17 +142,40 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               size: 30.0,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: IconButton(
-                              onPressed: () {
-                                // addProductToFavourite();
-                              },
-                              icon: Icon(
-                                Icons.favorite_outline,
-                                color: AppColors.qblack,
-                              ),
-                            ),
+                          StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection("users-favourite-items")
+                                .doc(FirebaseAuth.instance.currentUser.email)
+                                .collection("items")
+                                .where("name",
+                                isEqualTo: widget._products['product_name'])
+                                .snapshots(),
+                            builder:
+                                (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.data == null) {
+                                return Text("");
+                              }
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: IconButton(
+                                  onPressed: () =>
+                                  snapshot
+                                      .data.docs.length ==
+                                      0
+                                      ? addToFavourite()
+                                      : CustomToast.toast('Already Added'),
+                                  icon: snapshot.data.docs.length == 0
+                                      ? Icon(
+                                    Icons.favorite_outline,
+                                    color: AppColors.qblack,
+                                  )
+                                      : Icon(
+                                    Icons.favorite,
+                                    color: AppColors.qblack,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       )

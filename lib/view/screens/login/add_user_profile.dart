@@ -23,7 +23,6 @@ class _ProfileInfoAddPageState extends State<ProfileInfoAddPage> {
 
     final FirebaseAuth _auth = FirebaseAuth.instance;
     var  currentUser = _auth.currentUser;
-
     CollectionReference _collectionRef = FirebaseFirestore.instance.collection("users-form-data");
     return _collectionRef.doc(currentUser.email).set({
       "name":_nameEditController.text,

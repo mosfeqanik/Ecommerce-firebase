@@ -201,18 +201,10 @@ class _HomePageState extends State<HomePage> {
                               hintText: "Search Products here",
                               hintStyle: TextStyle(fontSize: 15.sp)),
                           onTap: () {
-                            if (!isLoggedIn) {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
                                       builder: (context) => SearchScreen()),
                                   (route) => false);
-                            } else {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          LoginRegistrationSelectionPage()),
-                                  (route) => false);
-                            }
                           }),
                     ),
                   ),
@@ -222,18 +214,10 @@ class _HomePageState extends State<HomePage> {
                     color: AppColors.qblack,
                     child: InkWell(
                       onTap: () {
-                        if (!isLoggedIn) {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (context) => SearchScreen()),
                               (route) => false);
-                        } else {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      LoginRegistrationSelectionPage()),
-                              (route) => false);
-                        }
                       },
                       child: Icon(
                         Icons.search,
