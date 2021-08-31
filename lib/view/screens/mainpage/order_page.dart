@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/view/common_widgets/CustomTileForDrawer.dart';
 import 'package:wowsell/view/common_widgets/share_pref.dart';
 import 'package:wowsell/view/screens/login/Profile_View_Update.dart';
@@ -131,6 +132,11 @@ class OrderPage extends StatelessWidget {
                 child: Text("Something is wrong"),
               );
             }
+            if (snapshot.data == null)
+              return Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.qblack,
+                  ));
             if (snapshot.data.docs.isEmpty) {
               return Center(
                 child: Text("You have not ordered anything",style:
