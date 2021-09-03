@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
@@ -12,6 +13,7 @@ class ThankYouScreen extends StatefulWidget {
 class _ThankYouScreenState extends State<ThankYouScreen> {
   @override
   void initState() {
+    Notify();
     super.initState();
     Timer(Duration(seconds: 3), ()=>Navigator.of(context).pushAndRemoveUntil(
     MaterialPageRoute(builder: (context) => BottomNavController()),
@@ -28,7 +30,10 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image(image: AssetImage("assets/images/thankyou.jpg")),
+              Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: Image.asset('assets/images/wowsell_image.png', height:200.0),
+              ),
               SizedBox(
                 height: 30,
               ),
@@ -46,4 +51,38 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
       ),
     );
   }
+}
+class LocalNotify extends StatefulWidget{
+  @override
+  _LocalNotifyState createState() => _LocalNotifyState();
+}
+class _LocalNotifyState extends State<LocalNotify>{
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+
+
+          },
+          child: Icon(Icons.call),
+
+        ),
+      ),
+    );
+  }
+}
+void Notify() async{
+  String timezom = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+  await AwesomeNotifications().createNotification(
+    content: NotificationContent(
+      id: 1,
+      channelKey: 'key1',
+      title: 'WowSell',
+      body: 'your Order is Complete.',
+
+    ),
+    schedule: NotificationInterval(interval: 3, timeZone: timezom,repeats: false),
+  );
 }

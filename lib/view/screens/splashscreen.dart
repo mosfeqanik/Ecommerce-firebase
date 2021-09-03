@@ -42,7 +42,10 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image(image: AssetImage("assets/images/wowsell_image.png")),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Image.asset('assets/images/wowsell_image.png', height:400.0),
+              ),
               SizedBox(
                 height: 30,
               ),

@@ -79,7 +79,7 @@ class OrderPage extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text('E-Commerce application')
+                    Text('E-Commerce')
                   ],
                 ),
               ),
@@ -88,10 +88,10 @@ class OrderPage extends StatelessWidget {
               icon: Icons.person,
               textTitle: "Group Members",
             ),
-            CustomListTileForDrawer(
-              icon: Icons.star,
-              textTitle: "Md Mosfeq Anik",
-            ),
+            // CustomListTileForDrawer(
+            //   icon: Icons.star,
+            //   textTitle: "Md Mosfeq Anik",
+            // ),
             CustomListTileForDrawer(
               icon: Icons.star,
               textTitle: "Pritom Chowdhury",
@@ -102,7 +102,7 @@ class OrderPage extends StatelessWidget {
             ),
             CustomListTileForDrawer(
               icon: Icons.assistant_photo,
-              textTitle: "Ebrahim Joy",
+              textTitle: "Md. Jamir Ahmed ",
             ),
             Divider(),
             ListTile(
@@ -145,7 +145,7 @@ class OrderPage extends StatelessWidget {
             }
             return ListView.builder(
                 itemCount:
-                snapshot.data == null ? 0 : snapshot.data.docs.length,
+                snapshot.data == null?0 : snapshot.data.docs.length,
                 itemBuilder: (_, index) {
                   DocumentSnapshot _documentSnapshot =
                   snapshot.data.docs[index];

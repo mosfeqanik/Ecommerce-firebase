@@ -36,7 +36,7 @@ class _LoginRegistrationSelectionPageState
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   FadeAnimation(
                     1.2,
@@ -83,7 +83,7 @@ class _LoginRegistrationSelectionPageState
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   FadeAnimation(
                     1.8,

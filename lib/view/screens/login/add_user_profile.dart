@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+import 'package:flutter/painting.dart' show AssetImage, BoxDecoration, BoxFit, BoxShape, Color, DecorationImage, EdgeInsets, FontWeight, TextStyle;
 import 'package:provider/provider.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
 import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';

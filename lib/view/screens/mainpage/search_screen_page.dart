@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wowsell/const/appcolor.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
+
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -14,6 +16,28 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 1,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.green,
+            ),
+            onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavController()));}
+        ),
+        title: Center(
+          child: Text(
+            "Search here",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),

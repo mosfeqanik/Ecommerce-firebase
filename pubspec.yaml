@@ -30,6 +30,8 @@ dependencies:
   flutter_screenutil: ^5.0.0+2
   dots_indicator: ^2.0.0
   carousel_slider: ^4.0.0
+  awesome_notifications: ^0.0.6+10
+  firebase_messaging: ^10.0.5
 
 
 
@@ -47,6 +49,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/category/
+    - assets/images/thankyou.jpg
   fonts:
     - family: Satisfy
       fonts:

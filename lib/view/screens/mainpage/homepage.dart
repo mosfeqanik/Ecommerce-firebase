@@ -9,6 +9,8 @@ import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/view/common_widgets/CustomTileForDrawer.dart';
 import 'package:wowsell/view/common_widgets/share_pref.dart';
 import 'package:wowsell/view/screens/login/Profile_View_Update.dart';
+import 'package:wowsell/view/screens/mainpage/edit_profile.dart';
+import 'package:wowsell/view/screens/mainpage/horizontal_listview.dart';
 import 'package:wowsell/view/screens/mainpage/single_Product_View.dart';
 import 'package:wowsell/view/screens/login/login_n_registrationscreen_selectscreen.dart';
 import 'package:wowsell/view/screens/mainpage/search_screen_page.dart';
@@ -134,22 +136,34 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text('E-Commerce application')
+                    Text('Delivering Happiness')
                   ],
                 ),
               ),
             ),
             CustomListTileForDrawer(
               icon: Icons.person,
-              textTitle: "Group Members",
+              textTitle: "Project Owner",
             ),
-            CustomListTileForDrawer(
-              icon: Icons.star,
-              textTitle: "Md Mosfeq Anik",
-            ),
-            CustomListTileForDrawer(
-              icon: Icons.star,
-              textTitle: "Pritom Chowdhury",
+            // CustomListTileForDrawer(
+            //   icon: Icons.star,
+            //   textTitle: "Md Mosfeq Anik",
+            // ),
+
+            ListTile(
+              leading: InkWell(
+                  onTap: () {
+
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => SettingsUI()),
+                            (route) => false);
+                  },
+
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 55),
+
+                    child: Text('Pritom Chowdhury'),
+                  )),
             ),
             CustomListTileForDrawer(
               icon: Icons.engineering,
@@ -157,7 +171,7 @@ class _HomePageState extends State<HomePage> {
             ),
             CustomListTileForDrawer(
               icon: Icons.assistant_photo,
-              textTitle: "Ebrahim Joy",
+              textTitle: "Md. Jamir Ahmed",
             ),
             Divider(),
             ListTile(
@@ -190,12 +204,12 @@ class _HomePageState extends State<HomePage> {
                               fillColor: Colors.white,
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0)),
+                                    BorderRadius.all(Radius.circular(8)),
                                 borderSide: BorderSide(color: Colors.blue),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0)),
+                                    BorderRadius.all(Radius.circular(18)),
                                 borderSide: BorderSide(color: Colors.grey),
                               ),
                               hintText: "Search Products here",
@@ -208,29 +222,29 @@ class _HomePageState extends State<HomePage> {
                           }),
                     ),
                   ),
-                  Container(
-                    height: 50.h,
-                    width: 50.h,
-                    color: AppColors.qblack,
-                    child: InkWell(
-                      onTap: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => SearchScreen()),
-                              (route) => false);
-                      },
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                  )
+                  // Container(
+                  //   height: 30.h,
+                  //   width: 50.h,
+                  //   color: AppColors.qblack,
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //         Navigator.of(context).pushAndRemoveUntil(
+                  //             MaterialPageRoute(
+                  //                 builder: (context) => SearchScreen()),
+                  //             (route) => false);
+                  //     },
+                  //     child: Icon(
+                  //       Icons.search,
+                  //       color: Colors.white,
+                  //       size: 30,
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),
             AspectRatio(
-              aspectRatio: 19 / 9,
+              aspectRatio: 19 / 6,
               child: CarouselSlider(
                 items: _carouselImages
                     .map(
@@ -261,9 +275,9 @@ class _HomePageState extends State<HomePage> {
                     }),
               ),
             ),
-            SizedBox(
-              height: 10.h,
-            ),
+            // SizedBox(
+            //   height: 5.h,
+            // ),
             DotsIndicator(
               dotsCount:
                   _carouselImages.length == 0 ? 1 : _carouselImages.length,
@@ -276,6 +290,16 @@ class _HomePageState extends State<HomePage> {
                 size: Size(6, 6),
               ),
             ),
+            new Padding(padding: const EdgeInsets.all(8.0),
+
+            ),
+            HorizontalList(),
+            // SizedBox(
+            //   height: 6.h,
+            // ),
+
+
+
             Expanded(
               child: GridView.builder(
                   scrollDirection: Axis.horizontal,
@@ -298,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             AspectRatio(
-                              aspectRatio: 1.30,
+                              aspectRatio: 1.6,
                               child: Container(
                                 child: Image.network(
                                   _products[index]["product_img"][0],
