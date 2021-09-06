@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:wowsell/const/appcolor.dart';
 import 'package:wowsell/database/database_helper.dart';
 import 'package:wowsell/model/E_commerce_Provider_Data.dart';
+import 'package:wowsell/view/screens/mainpage/navigation_bar_App_bar_Drawer.dart';
 
 class FavouritePage extends StatefulWidget {
   @override
@@ -33,7 +34,10 @@ class _FavouritePageState extends State<FavouritePage> {
             icon: Icon(Icons.arrow_back_ios_outlined),
             color: Colors.black,
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BottomNavController()),
+              );
             },
           ),
           title: Column(

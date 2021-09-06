@@ -172,7 +172,7 @@ class OrderPage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         children: [
-                          SizedBox(width: 20),
+                          // SizedBox(width: 20),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,

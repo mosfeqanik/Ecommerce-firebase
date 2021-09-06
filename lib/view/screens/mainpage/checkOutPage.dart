@@ -40,9 +40,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
           FadeAnimation(
               1.6,
               Text(
-                "Name",
+                "🧑Your Name :-",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.brown,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               )),
@@ -51,9 +51,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
           ),
           FadeAnimation(
               1.6,
-              Text(
-                customerName,
-                style: TextStyle(color: Colors.grey),
+              Padding(
+                padding: const EdgeInsets.only(left: 40),
+                child: Text(
+                  customerName,
+                  style: TextStyle(
+                      color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),
+                ),
               )),
           SizedBox(
             height: 20,
@@ -61,9 +65,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
           FadeAnimation(
               1.6,
               Text(
-                "Phone",
+                " 📱Your Phone Number :-",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.brown,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               )),
@@ -72,9 +76,14 @@ class _CheckOutPageState extends State<CheckOutPage> {
           ),
           FadeAnimation(
               1.6,
-              Text(
-                customerPhone,
-                style: TextStyle(color: Colors.grey),
+              Padding(
+                padding: const EdgeInsets.only(left:40.0),
+                child: Text(
+                  customerPhone,
+                  style: TextStyle(
+
+                    color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),
+                ),
               )),
           SizedBox(
             height: 10,
@@ -82,9 +91,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
           FadeAnimation(
               1.6,
               Text(
-                "Address",
+                "🗼Your Address :-",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.brown,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               )),
@@ -93,9 +102,14 @@ class _CheckOutPageState extends State<CheckOutPage> {
           ),
           FadeAnimation(
               1.6,
-              Text(
-                customerAddress,
-                style: TextStyle(color: Colors.grey),
+              Padding(
+                padding: const EdgeInsets.only(left: 40),
+                child: Text(
+                  customerAddress,
+                  style: TextStyle(
+
+                      color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),
+                ),
               )),
           SizedBox(
             height: 20,
@@ -105,7 +119,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               Text(
                 "Products",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               )),
@@ -165,7 +179,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white70,
       body: Stack(
         children: <Widget>[
           CustomScrollView(
@@ -216,19 +230,23 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                       Text(
                                         "${provider.total.toString()} \$",
                                         style: TextStyle(
-                                            color: Colors.grey, fontSize: 16),
+                                            color: Colors.white, fontSize: 16),
                                       )),
                                 ],
                               );
                             }),
+
                             Row(
                               children: <Widget>[
                                 FadeAnimation(
                                     1.2,
-                                    Text(
-                                      order,
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        order,
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 16),
+                                      ),
                                     )),
                               ],
                             )
@@ -274,11 +292,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       height: 50,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: Colors.yellow),
+                          color: Colors.black87),
                       child: Align(
                           child: Text(
                         "CheckOut",
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.white70,fontWeight: FontWeight.bold),
                       )),
                     ),
                   ),

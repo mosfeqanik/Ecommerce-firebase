@@ -145,11 +145,6 @@ class _HomePageState extends State<HomePage> {
               icon: Icons.person,
               textTitle: "Project Owner",
             ),
-            // CustomListTileForDrawer(
-            //   icon: Icons.star,
-            //   textTitle: "Md Mosfeq Anik",
-            // ),
-
             ListTile(
               leading: InkWell(
                   onTap: () {
